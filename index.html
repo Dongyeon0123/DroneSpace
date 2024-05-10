@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>드론 스페이스</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: aquamarine;
+            padding: 1px 35px;
+            border-bottom: 2px solid #000;
+        }
+        .menu {
+            list-style-type: none;
+            margin-left: 200px;
+            padding: 0;
+            display: flex;
+            font-weight: bold;
+        }
+        .menu li {
+            margin-right: 50px;
+        }
+        .menu li:hover {
+            color: blue; /* 마우스를 올렸을 때 글자 색상을 파란색으로 변경합니다. */
+        }
+        .menu li:last-child {
+            margin-right: 50px;
+        }
+        .hamburger {
+            margin-left: auto;
+            cursor: pointer;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Drone Space</h1>
+        <ul class="menu">
+            <li>채용정보</li> <!--지역별 / 자격증별 / HOT 100 -->
+            <li>드론 관련 기업</li> <!-- 기업 리뷰 / 연봉 정보, 면접 후기-->
+            <li>커뮤니티</li> <!-- 사람인 참고 전체글 / HOT글 / 주제별 -->
+            <li>로그인 / 회원가입</li>
+            <li>
+                <input type="text" id="searchInput" placeholder="검색어를 입력하세요">
+                <button onclick="search()">검색</button>
+
+                <ul id="searchResults">
+                    <!-- 검색 결과가 여기에 표시됩니다 -->
+                </ul>
+            </li>
+        </ul>
+        <div class="hamburger">
+            
+            &#9776;
+        </div>
+    </div>
+
+    <script>
+        function search() {
+            // 검색어 가져오기
+            var keyword = document.getElementById("searchInput").value.toLowerCase();
+            var list = document.querySelectorAll("ul li");
+
+            // 검색 결과를 담을 배열
+            var results = [];
+
+            // 각 요소를 순회하며 검색어가 포함되어 있는지 확인
+            list.forEach(function(item) {
+                var text = item.textContent.toLowerCase();
+                if (text.includes(keyword)) {
+                    results.push(item);
+                }
+            });
+
+            // 검색 결과를 화면에 표시
+            displayResults(results);
+        }
+
+        function displayResults(results) {
+            var searchResults = document.getElementById("searchResults");
+            searchResults.innerHTML = ""; // 기존 검색 결과 초기화
+
+            results.forEach(function(item) {
+                var li = document.createElement("li");
+                li.textContent = item.textContent;
+                searchResults.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
