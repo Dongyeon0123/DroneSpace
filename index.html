@@ -15,6 +15,7 @@
             background-color: aquamarine;
             padding: 1px 35px;
             border-bottom: 2px solid #000;
+            height: 90px;
         }
         .menu {
             list-style-type: none;
@@ -22,20 +23,30 @@
             padding: 0;
             display: flex;
             font-weight: bold;
+            flex-wrap: nowrap; /* 메뉴가 한 줄로만 유지되도록 설정 */
         }
         .menu li {
-            margin-right: 50px;
+            margin-right: 20px; /* 메뉴 항목 사이의 간격 조정 */
+            white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
         }
         .menu li:hover {
             color: blue; /* 마우스를 올렸을 때 글자 색상을 파란색으로 변경합니다. */
         }
         .menu li:last-child {
-            margin-right: 50px;
+            margin-right: 20px; /* 마지막 메뉴 항목과 검색창 사이의 간격 조정 */
         }
         .hamburger {
             margin-left: auto;
             cursor: pointer;
             font-size: 48px;
+        }
+
+        /* 미디어 쿼리(Media Query)를 사용하여 화면의 너비에 따라 메뉴 항목의 너비를 조절 */
+        @media screen and (max-width: 1100px) {
+            .menu li {
+                flex: 1; /* 메뉴 항목의 너비를 동일하게 설정하여 한 줄에 모두 표시되도록 합니다. */
+                display: none;
+            }
         }
     </style>
 </head>
@@ -57,42 +68,8 @@
             </li>
         </ul>
         <div class="hamburger">
-            
             &#9776;
         </div>
     </div>
-
-    <script>
-        function search() {
-            // 검색어 가져오기
-            var keyword = document.getElementById("searchInput").value.toLowerCase();
-            var list = document.querySelectorAll("ul li");
-
-            // 검색 결과를 담을 배열
-            var results = [];
-
-            // 각 요소를 순회하며 검색어가 포함되어 있는지 확인
-            list.forEach(function(item) {
-                var text = item.textContent.toLowerCase();
-                if (text.includes(keyword)) {
-                    results.push(item);
-                }
-            });
-
-            // 검색 결과를 화면에 표시
-            displayResults(results);
-        }
-
-        function displayResults(results) {
-            var searchResults = document.getElementById("searchResults");
-            searchResults.innerHTML = ""; // 기존 검색 결과 초기화
-
-            results.forEach(function(item) {
-                var li = document.createElement("li");
-                li.textContent = item.textContent;
-                searchResults.appendChild(li);
-            });
-        }
-    </script>
 </body>
 </html>
