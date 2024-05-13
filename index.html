@@ -27,6 +27,17 @@
         .header a {
             text-decoration: none;
         }
+        .header h2 {
+            margin-left: 100px;
+            color: black; /* 기본 색상을 검정색으로 설정 */
+            margin: 0; /* 제목의 여백 제거 */
+        }
+        .header h2:hover {
+            color: blue;
+        }
+        .header a {
+            text-decoration: none;
+        }
         .menu {
             list-style-type: none;
             margin-left: 200px;
@@ -60,6 +71,7 @@
             margin: 8px 0;
         }
 
+<<<<<<< HEAD
                 /* 검색창 스타일링 */
         #searchInput {
             padding: 13px 400px; /* 내부 여백 설정 */
@@ -89,15 +101,25 @@
             background-color: #0056b3; /* 마우스 호버 시 배경색 변경 */
         }
 
+=======
+>>>>>>> 8d6d5ff28b16e1a03ca456fc40a8854d76e5053b
         .hamburger {
             margin-left: auto;
             cursor: pointer;
             font-size: 35px;
         }
 
+<<<<<<< HEAD
         .container {
             background-color: whitesmoke;
             text-align: center; /* 검색창 가운데 정렬 */
+=======
+        /* 미디어 쿼리(Media Query)를 사용하여 화면의 너비에 따라 메뉴 항목의 너비를 조절 */
+        @media screen and (max-width: 1100px) {
+            .menu li {
+                display: none;
+            }
+>>>>>>> 8d6d5ff28b16e1a03ca456fc40a8854d76e5053b
         }
     </style>
 </head>
@@ -176,7 +198,15 @@
             </li>
             <li>로그인 / 회원가입</li>
             <li>
+<<<<<<< HEAD
                 
+=======
+                <input type="text" id="searchInput" placeholder="검색어를 입력하세요">
+                <button onclick="search()">검색</button>
+                <ul id="searchResults">
+                    <!-- 검색 결과가 여기에 표시됩니다 -->
+                </ul>
+>>>>>>> 8d6d5ff28b16e1a03ca456fc40a8854d76e5053b
             </li>
         </ul>
         <div class="hamburger">
