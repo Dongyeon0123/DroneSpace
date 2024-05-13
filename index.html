@@ -12,29 +12,55 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: aquamarine;
+            background-color: whitesmoke;
             padding: 1px 35px;
             border-bottom: 2px solid #000;
             height: 90px;
         }
+        .header h2 {
+            margin-left: 100px;
+            color: black; /* 기본 색상을 검정색으로 설정 */
+            margin: 0; /* 제목의 여백 제거 */
+        }
+        .header h2:hover {
+            color: blue;
+        }
+        .header a {
+            text-decoration: none;
+        }
         .menu {
             list-style-type: none;
-            margin-left: 450px;
+            margin-left: 200px;
             padding: 0;
             display: flex;
             font-weight: bold;
-            flex-wrap: nowrap; /* 메뉴가 한 줄로만 유지되도록 설정 */
+            position: relative; /* 상대 위치 설정 */
         }
         .menu li {
-            margin-right: 80px; /* 메뉴 항목 사이의 간격 조정 */
+            margin-right: 50px; /* 메뉴 항목 사이의 간격 조정 */
             white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
+            position: relative; /* 하위 메뉴의 위치를 설정하기 위해 부모 요소를 relative로 설정합니다. */
         }
-        .menu li:hover {
-            color: blue; /* 마우스를 올렸을 때 글자 색상을 파란색으로 변경합니다. */
+        .menu li ul {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            display: none;
+            border: 1px solid #000;
+            background-color: rgb(227, 227, 227);
+            padding: 10px;
+            list-style: none; /* 하위 메뉴의 목록 스타일 제거 */
+            margin: 0; /* 하위 메뉴의 여백 제거 */
         }
-        .menu li:last-child {
-            margin-right: 20px; /* 마지막 메뉴 항목과 검색창 사이의 간격 조정 */
+        .menu li:hover ul {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
         }
+        .menu li:hover ul li {
+            margin: 8px 0;
+        }
+
         .hamburger {
             margin-left: auto;
             cursor: pointer;
@@ -44,7 +70,6 @@
         /* 미디어 쿼리(Media Query)를 사용하여 화면의 너비에 따라 메뉴 항목의 너비를 조절 */
         @media screen and (max-width: 1100px) {
             .menu li {
-                flex: 1; /* 메뉴 항목의 너비를 동일하게 설정하여 한 줄에 모두 표시되도록 합니다. */
                 display: none;
             }
         }
@@ -52,16 +77,81 @@
 </head>
 <body>
     <div class="header">
-        <h1>Drone Space</h1>
+        <a href="http://127.0.0.1:5500/index.html"><h2>Drone Space</h2></a>
         <ul class="menu">
-            <li>채용정보</li> <!--지역별 / 자격증별 / HOT 100 -->
-            <li>드론 관련 기업</li> <!-- 기업 리뷰 / 연봉 정보, 면접 후기-->
-            <li>커뮤니티</li> <!-- 사람인 참고 전체글 / HOT글 / 주제별 -->
+            <li>
+                아카데미 소개
+                <ul>
+                    <li>인사말</li>
+                    <li>날리자 KU연혁</li>
+                    <li>비전</li>
+                    <li>인증서</li>
+                    <li>시설 현황</li>
+                    <li>오시는 길</li>
+                    <li>전체 교육 과정 안내</li>
+                </ul>
+            </li>
+            <li>
+                국가 자격증
+                <ul>
+                    <li>국가 자격증 안내</li>
+                    <li>교육비 지원 안내</li>
+                    <li>기관/단체 교육 안내</li>
+                    <li>1종 조종자 과정</li>
+                    <li>2종 조종자 과정</li>
+                    <li>3종 조종자 과정</li>
+                    <li>드론 운용자 교육</li>
+                    <li>지도 조종자 과정</li>
+                    <li>실기 평가자 과정</li>
+                </ul>
+            </li>
+            <li>
+                체험 교육
+                <ul>
+                    <li>교육 과정 안내</li>
+                </ul>
+            </li>
+            <li>
+                채용정보
+                <ul>
+                    <li>지역별</li>
+                    <li>자격증별</li>
+                    <li>HOT 100</li>
+                </ul>
+            </li>
+            <li>
+                드론 관련 기업
+                <ul>
+                    <li>기업 리뷰</li>
+                    <li>연봉 정보</li>
+                    <li>면접 후기</li>
+                </ul>
+            </li>
+            <li>
+                커뮤니티
+                <ul>
+                    <li>전체글</li>
+                    <li>드론 강의</li>
+                    <li>HOT글</li>
+                    <li>주제별</li>
+                    <li>QNA</li>
+                </ul>
+            </li>
+            <li>
+                고객센터
+                <ul>
+                    <li>공지사항</li>
+                    <li>교육문의</li>
+                    <li>자주 묻는 질문</li>
+                    <li>1:1 게시판</li>
+                    <li>자료실</li>
+                    <li>빠른 상담 관리</li>
+                </ul>
+            </li>
             <li>로그인 / 회원가입</li>
             <li>
                 <input type="text" id="searchInput" placeholder="검색어를 입력하세요">
                 <button onclick="search()">검색</button>
-
                 <ul id="searchResults">
                     <!-- 검색 결과가 여기에 표시됩니다 -->
                 </ul>
