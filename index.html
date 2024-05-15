@@ -29,16 +29,27 @@
         }
         .menu {
             list-style-type: none;
-            margin-left: 350px;
+            margin-left: 330px;
             padding: 0;
             display: flex;
             font-weight: bold;
             position: relative; /* 상대 위치 설정 */
         }
+        .menu li:not(:last-child)::after {
+            content: "|"; /* 수직선 추가 */
+            color: rgb(156, 154, 154);
+            margin-left: 30px;
+        }
         .menu li {
-            margin-right: 50px; /* 메뉴 항목 사이의 간격 조정 */
+            margin-right: 30px; /* 메뉴 항목 사이의 간격 조정 */
             white-space: nowrap; /* 텍스트가 한 줄로만 표시되도록 설정 */
             position: relative; /* 하위 메뉴의 위치를 설정하기 위해 부모 요소를 relative로 설정합니다. */
+        }
+        .menu li:hover {
+            color: blue;
+        }
+        .menu li:hover > ul li {
+            color: black; /* 하위 메뉴 항목의 글자색을 기본색(검정색)으로 변경 */
         }
         .menu li ul {
             position: absolute;
@@ -106,9 +117,9 @@
         <a href="http://127.0.0.1:5500/index.html"><h2>Drone Space</h2></a>
         <ul class="menu">
             <li>
-                기업 소개
+                <a href="http://127.0.0.1:5500/hello.html" style="color: black;">기업 소개</a>
                 <ul>
-                    <li>인사말</li>
+                    <li><a href="http://127.0.0.1:5500/hello.html" style="color: black;">인사말</a></li>
                     <li>DroneSpace 연혁</li>
                     <li>비전</li>
                     <li>인증서</li>
@@ -118,9 +129,9 @@
                 </ul>
             </li>
             <li>
-                국가 자격증
+                <a href="http://127.0.0.1:5500/information.html" style="color: black;">국가 자격증</a>
                 <ul>
-                    <li>국가 자격증 안내</li>
+                    <li><a href="http://127.0.0.1:5500/information.html" style="color: black;">국가 자격증 안내</a></li>
                     <li>교육비 지원 안내</li>
                     <li>기관/단체 교육 안내</li>
                     <li>1종 조종자 과정</li>
@@ -132,34 +143,31 @@
                 </ul>
             </li>
             <li>
-                구인 & 구직
+                <a href="http://127.0.0.1:5500/area.html" style="color: black;">구인 & 구직</a>
                 <ul>
-                    <li>지역별</li>
+                    <li><a href="http://127.0.0.1:5500/area.html" style="color: black;">지역별</a></li>
                     <li>자격증별</li>
                     <li>HOT 100</li>
                 </ul>
             </li>
             <li>
-                드론 관련 기업
+                <a href="http://127.0.0.1:5500/review.html" style="color: black;">드론 관련 기업</a>
                 <ul>
-                    <li>기업 리뷰</li>
+                    <li><a href="http://127.0.0.1:5500/review.html" style="color: black;">기업 리뷰</a></li>
                     <li>면접 후기</li>
                 </ul>
             </li>
             <li>
-                커뮤니티
+                <a href="http://127.0.0.1:5500/everything.html" style="color: black;">커뮤니티</a>
                 <ul>
-                    <li>전체글</li>
+                    <li><a href="http://127.0.0.1:5500/everything.html" style="color: black;">전체글</a></li>
                     <li>드론 강의</li>
                     <li>HOT글</li>
                     <li>주제별</li>
                     <li>1대1 질문 게시판</li>
                 </ul>
             </li>
-            <li><a href="http://127.0.0.1:5500/login.html">로그인 / 회원가입</a></li>
-            <li>
-                
-            </li>
+            <li><a href="http://127.0.0.1:5500/login.html" style="color: black;">로그인 / 회원가입</a></li>
         </ul>
         <div class="hamburger">
             &#9776;
