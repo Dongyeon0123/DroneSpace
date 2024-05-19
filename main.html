@@ -51,16 +51,15 @@
         .menu li ul {
             position: absolute;
             top: 100%;
-            left: 0;
             display: none;
             background-color: rgb(227, 227, 227);
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            border-radius: 0 0 10px 10px;
+            margin: 0px;
+            list-style: none; /* 하위 메뉴의 목록 스타일 제거 */
+            padding-left: 0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
             border-top: 5px solid rgb(51, 179, 57);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 10;
         }
 
         .menu li:not(:last-child)::after {
@@ -78,7 +77,9 @@
         }
 
         .menu li ul li {
-            padding: 15px;
+            width: 145px;
+            padding: 15px; /* 각 하위 메뉴 항목에 적절한 패딩 적용 */
+            display: block; /* 항목을 블록 요소로 설정하여 전체 영역을 차지하도록 함 */
             text-align: center;
         }
 
@@ -118,7 +119,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         #searchButton:hover {
