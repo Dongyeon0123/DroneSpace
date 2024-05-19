@@ -18,7 +18,7 @@
             height: 70px;
         }
         .header h2 {
-            color: black; /* 기본 색상을 검정색으로 설정 */
+            color: rgb(51, 179, 57);
             margin: 0; /* 제목의 여백 제거 */
         }
         .header h2:hover {
@@ -35,6 +35,7 @@
             font-weight: bold;
             position: relative; /* 상대 위치 설정 */
         }
+
         .menu li:not(:last-child)::after {
             content: "|"; /* 수직선 추가 */
             color: rgb(156, 154, 154);
@@ -51,30 +52,35 @@
         .menu li ul {
             position: absolute;
             top: 100%;
-            left: 0;
             display: none;
-            border: 1px solid #000;
             background-color: rgb(227, 227, 227);
-            padding: 10px;
+            margin: 0px;
             list-style: none; /* 하위 메뉴의 목록 스타일 제거 */
+            padding-left: 0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-top: 5px solid rgb(51, 179, 57);
         }
         .menu li:hover ul {
             display: flex;
             flex-direction: column;
             position: absolute;
         }
-        .menu li:hover ul li {
-            margin: 8px 0;
-        }
 
         .menu li ul li {
-            padding: 10px 10px; /* 각 하위 메뉴 항목에 적절한 패딩 적용 */
+            width: 150px;
+            padding: 15px; /* 각 하위 메뉴 항목에 적절한 패딩 적용 */
             display: block; /* 항목을 블록 요소로 설정하여 전체 영역을 차지하도록 함 */
             text-align: center;
         }
 
         .menu li ul li:hover {
-            background-color: green;
+            background-color: rgb(51, 179, 57);
+        }
+
+        .menu li ul li:last-child {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
         }
 
         .menu li ul li:not(:last-child)::after {
