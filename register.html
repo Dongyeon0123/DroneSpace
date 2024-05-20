@@ -27,6 +27,7 @@ body {
 }
 .input-group {
   margin-bottom: 20px;
+  cursor: pointer;
 }
 .input-group label {
   display: block;
@@ -41,15 +42,15 @@ body {
   float: left;
 }
 .input-group label.required {
-  position: relative; /* 필수 텍스트를 라벨 내부에 배치하기 위해 */
+  position: relative;
 }
 .input-group label.required:after {
   content: '*필수';
   color: red;
-  position: absolute; /* 라벨 내부에 절대 위치로 배치 */
-  top: 70%; /* 수직 정렬 */
-  right: 0; /* 우측 정렬 */
-  transform: translateY(-50%); /* 수직 방향으로 중앙 정렬 */
+  position: absolute;
+  top: 70%;
+  right: 0;
+  transform: translateY(-50%);
   font-size: 0.8em;
 }
 .input-group label:after {
@@ -61,6 +62,16 @@ body {
   background-color: #007bff;
   color: #fff;
   cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
 }
 .input-group input[type="submit"]:hover {
   background-color: #0056b3;
@@ -80,18 +91,18 @@ body {
 <body>
 <div class="container">
   <h2>회원가입</h2>
-  <form action="/register" method="post">
+  <form action="register.php" method="post" enctype="multipart/form-data">
     <div class="input-group">
-      <label for="username" class="required">아이디:</label>
-      <input type="text" id="username" name="username" required>
+      <label for="memberid" class="required">아이디:</label>
+      <input type="text" id="memberid" name="memberid" required>
     </div>
     <div class="input-group">
       <label for="password" class="required">비밀번호:</label>
-      <input type="password" id="password" name="password" required> 
+      <input type="password" id="password" name="password" required>
     </div>
     <div class="input-group">
-      <label for="fullname" class="required">성명:</label>
-      <input type="text" id="fullname" name="fullname" required>
+      <label for="name" class="required">성명:</label>
+      <input type="text" id="name" name="name" required>
     </div>
     <div class="input-group">
       <label for="email" class="required">이메일:</label>
@@ -110,19 +121,15 @@ body {
       <input type="file" id="licenseImage" name="licenseImage" accept="image/*">
     </div>
     <div class="input-group">
-        <label for="dronePhoto">드론 사진 첨부:</label>
-        <input type="file" id="dronePhoto" name="dronePhoto" accept="image/*">
-    </div>
-    <div class="input-group">
-        <label for="identificationPhoto" class="required">본인인증 사진 첨부:</label>
-        <input type="file" id="identificationPhoto" name="identificationPhoto" accept="image/*" required>
+      <label for="identificationPhoto" class="required">본인인증 사진 첨부:</label>
+      <input type="file" id="identificationPhoto" name="identificationPhoto" accept="image/*" required>
     </div>
     <div class="input-group">
       <input type="submit" value="가입하기">
     </div>
   </form>
-  <div class="login-link"><br><br><br><br>
-    <p>이미 계정이 있으신가요? <a href="login.html">로그인</a></p>
+  <div class="login-link">
+    <p>이미 계정이 있으신가요? <a href="login.html" class="submit-btn">로그인</a></p>
   </div>
 </div>
 </body>
