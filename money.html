@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3종 과정</title>
+    <title>교육비 지원</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,11 +11,6 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
         }
         .header {
             display: flex;
@@ -183,26 +178,22 @@
         .menu-overlay-content ul li a:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
-        .showcase {
-            background: #333 url('drone.jpg') no-repeat 0 -400px;
-            text-align: center;
-            color: #fff;
-        }
-        .showcase h1 {
-            margin-top: 50px;
-            font-size: 55px;
-            margin-bottom: 10px;
-        }
-        .showcase p {
-            font-size: 20px;
-            margin-bottom: 50px;
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding-bottom: 70px;
         }
         .main-content {
             padding: 20px;
             background: #fff;
+            margin-top: 20px;
         }
-        .main-content h2 {
-            margin-top: 0;
+        .main-content h2, .main-content h3 {
+            color: #333;
+        }
+        .main-content p, .main-content ul {
+            margin-bottom: 20px;
         }
         .main-content ul {
             list-style: none;
@@ -213,12 +204,60 @@
             margin: 5px 0;
             padding: 10px;
         }
-        .footer {
+        .main-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .main-content table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .main-content th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        footer {
             background: #333;
             color: #fff;
             text-align: center;
             padding: 10px 0;
             margin-top: 20px;
+        }
+        .header-icons span {
+            margin-right: 10px;
+        }
+        .menu-icons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+        .menu-icons div {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: #ddd;
+            margin: 5px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding-bottom: 70px;
+        }
+        .showcase {
+            background: #333 url('drone.jpg') no-repeat 0 -400px;
+            text-align: center;
+            color: #fff;
+        }
+        .showcase h1 {
+            margin-top: 70px;
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+        .showcase p {
+            font-size: 15px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -284,137 +323,52 @@
     </header>
     <section class="showcase">
         <div class="container">
-            <h1>드론 국가자격증 3종 과정</h1>
-            <p>드론 조종 및 운용에 대한 깊이 있는 이해와 전문적인 기술 습득을 목표로 합니다.</p>
+            <h1>교육비지원</h1>
         </div>
     </section>
-    <section class="main-content container">
-        <h2>취득 시 운용 가능 기체</h2>
-        <p>2kg이상 ~ 7kg미만</p>
-        
-        <h2>취득 시 활용 분야</h2>
-        <ul>
-            <li>관공서 공공기관 취업</li>
-            <li>드론촬영</li>
-            <li>드론제작/ 개발/ 정비/교육 등</li>
-        </ul>
-        
-        <h2>전문 교육과정 안내</h2>
-        <p>드론 조종 및 운용에 대한 깊이 있는 이해와 전문적인 기술 습득을 목표로 합니다.</p>
-        
-        <h3>장점</h3>
-        <ul>
-            <li>체계적이고 깊이 있는 교육 커리큘럼으로 전문 지식 습득</li>
-            <li>실제 비행 실습을 통한 실전 경험 제공</li>
-            <li>다양한 드론 운용 시나리오에 대한 이해 증진</li>
-            <li>드론 기술의 최신 트렌드와 안전 규정 학습</li>
-        </ul>
-        
-        <h3>단점</h3>
-        <ul>
-            <li>상대적으로 긴 교육 기간 요구</li>
-            <li>속성 과정에 비해 높은 교육 비용 발생 가능성</li>
-            <li>일정한 시간 투자가 필요하여 바쁜 일정의 학습자에게 부담</li>
-            <li>학과시험에 대한 부담이 적어 자칫 이론 수업 부진이 올 수 있음</li>
-        </ul>
-        
-        <h3>전문 교육 과정 상세 내용</h3>
-        <table border="1" cellspacing="0" cellpadding="10">
-            <tr>
-                <th>과정</th>
-                <th>시간</th>
-                <th>내용</th>
-            </tr>
-            <tr>
-                <td>학과 교육</td>
-                <td>20시간 (필수 교육)</td>
-                <td>
-                    이론 항공법규 2시간<br>
-                    항공역학 / 비행이론 5시간<br>
-                    항공기상 2시간<br>
-                    비행운용 이론 11시간<br>
-                    (자체 시험, 교통안전공단 학과시험 면제)
-                </td>
-            </tr>
-            <tr>
-                <td>모의비행교육</td>
-                <td>6시간</td>
-                <td>시뮬레이션 기체 및 입문용 드론 교육</td>
-            </tr>
-            <tr>
-                <td>실기교육</td>
-                <td>6시간</td>
-                <td>
-                    1. 조종기 조작법<br>
-                    2. 이륙비행<br>
-                    3. 직진 및 후진 수평비행<br>
-                    4. 삼각비행<br>
-                    (드론아카데미 차체비행장 실기시험 응시)
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">총 교육시간 32시간 (필수)</td>
-            </tr>
-        </table>
-        
-        <h2>속성 교육과정 안내</h2>
-        <p>짧은 시간 내에 드론 조종과 기본 운용 능력을 배울 수 있는 집중 과정입니다.</p>
-        
-        <h3>장점</h3>
-        <ul>
-            <li>짧은 기간 내에 드론 조종 기초 습득</li>
-            <li>자격증 취득을 위한 실질적인 준비 과정</li>
-            <li>시간적, 경제적 부담 감소</li>
-            <li>바쁜 일정을 가진 학습자에게 유연한 학습 기회 제공</li>
-        </ul>
-        
-        <h3>단점</h3>
-        <ul>
-            <li>전문 교육 과정에 비해 상대적으로 얕은 지식 습득</li>
-            <li>심화 학습과 다양한 실습 기회 부족</li>
-            <li>전문적인 드론 운용 능력 향상에 한계 있을 수 있음</li>
-            <li>학과 시험을 교육센터 외 장소에 치러야 한다는 부담감이 있음</li>
-        </ul>
-        
-        <h3>속성 교육 과정 상세 내용</h3>
-        <table border="1" cellspacing="0" cellpadding="10">
-            <tr>
-                <th>과정</th>
-                <th>시간</th>
-                <th>내용</th>
-            </tr>
-            <tr>
-                <td>학과 교육</td>
-                <td>6시간 (선택교육 5인 이상)</td>
-                <td>
-                    이론 항공법규 1시간<br>
-                    항공역학 / 비행이론 2시간<br>
-                    항공기상 1시간<br>
-                    비행운용 이론 2시간<br>
-                    (교통안전공단 학과시험)
-                </td>
-            </tr>
-            <tr>
-                <td>모의비행교육</td>
-                <td>3시간 (필수)</td>
-                <td>시뮬레이션 기체 및 입문용 드론 교육</td>
-            </tr>
-            <tr>
-                <td>실기교육</td>
-                <td>6시간 (필수)</td>
-                <td>
-                    1. 조종기 조작법<br>
-                    2. 이륙비행<br>
-                    3. 직진 및 후진 수평비행<br>
-                    4. 삼각비행<br>
-                    (교육원 차체비행장 실기시험 응시)
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">총교육시간 15시간 (필수 9시간 선택 6시간)</td>
-            </tr>
-        </table>
-    </section>
+
+        <section class="main-content container">
+            <h2>교육비지원안내</h2>
+            <p>국민내일배움카드 교육비 지원 안내</p>
+            <p>국민내일배움카드를 통한 교육비 지원은 국민 누구나 질 높은 직업 교육을 받을 수 있도록 고용노동부에서 마련한 제도입니다. 현재 시스템은 준비 중에 있으며, 다음과 같은 내용으로 구성됩니다.</p>
+
+            <h3>교육비 지원 안내</h3>
+            <table>
+                <tr>
+                    <th>항목</th>
+                    <th>내용</th>
+                </tr>
+                <tr>
+                    <td>소관기관</td>
+                    <td>고용노동부</td>
+                </tr>
+                <tr>
+                    <td>신청방법</td>
+                    <td>가까운 고용센터 또는 HRD-Net을 통해 신청</td>
+                </tr>
+                <tr>
+                    <td>지원내용</td>
+                    <td>5년간 300~500만원 한도 내에서 인정받은 적합훈련과정 수강 시 훈련비의 일부 또는 전액 지원</td>
+                </tr>
+                <tr>
+                    <td>지원대상</td>
+                    <td>국민 누구나</td>
+                </tr>
+                <tr>
+                    <td>지원 제외 대상</td>
+                    <td>공무원, 사립학교 교직원, 특정 소득 이상 자영업자, 대규모기업 근로자 등</td>
+                </tr>
+                <tr>
+                    <td>선정기준</td>
+                    <td>직업경력, 직업 능력 수준 등을 고려한 훈련 필요성 평가</td>
+                </tr>
+                <tr>
+                    <td>신청절차</td>
+                    <td>구직등록 → 카드발급 신청 → 훈련상담 및 수강신청 → 훈련수강</td>
+                </tr>
+            </table>
+        </section>
+    </div>
     <div class="menu-overlay" id="menuOverlay">
         <div class="menu-overlay-content">
             <ul>
