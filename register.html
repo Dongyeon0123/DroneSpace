@@ -87,11 +87,22 @@ body {
   text-decoration: underline;
 }
 </style>
+<script>
+function validateForm() {
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("confirmPassword").value;
+  if (password !== confirmPassword) {
+    alert("비밀번호가 일치하지 않습니다.");
+    return false;
+  }
+  return true;
+}
+</script>
 </head>
 <body>
 <div class="container">
   <h2>회원가입</h2>
-  <form action="register.php" method="post" enctype="multipart/form-data">
+  <form action="register.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
     <div class="input-group">
       <label for="memberid" class="required">아이디:</label>
       <input type="text" id="memberid" name="memberid" required>
@@ -101,6 +112,10 @@ body {
       <input type="password" id="password" name="password" required>
     </div>
     <div class="input-group">
+      <label for="confirmPassword" class="required">비밀번호 확인:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+    </div>
+    <div class="input-group">
       <label for="name" class="required">성명:</label>
       <input type="text" id="name" name="name" required>
     </div>
@@ -108,10 +123,6 @@ body {
       <label for="email" class="required">이메일:</label>
       <input type="email" id="email" name="email" required>
     </div>
-    <!-- <div class="input-group">
-      <label for="birth" class="required">생년월일:</label>
-      <input type="date" id="birth" name="birth" required>
-    </div> -->
     <div class="input-group">
       <label for="cernum">자격증 번호:</label>
       <input type="text" id="cernum" name="cernum">

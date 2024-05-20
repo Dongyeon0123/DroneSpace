@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pass = $_POST['password'];
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $cernum = isset($_POST['cernum']) ? intval($_POST['cernum']) : null;
+    $cernum = isset($_POST['cernum']) && $_POST['cernum'] !== '' ? $_POST['cernum'] : null;
 
     // 데이터 로그
     error_log("Received data: memberid=$memberid, name=$name, email=$email, cernum=$cernum");
