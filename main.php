@@ -280,12 +280,12 @@ session_start();
             <li>
                 기업 소개
                 <ul>
-                    <li><a href="hello.html">인사말</a></li>
+                    <li><a href="hello.php">인사말</a></li>
                     <li><a href="#">DroneSpace 연혁</a></li>
                     <li><a href="#">아카데미 비전</a></li>
                     <li><a href="#">인증서</a></li>
                     <li><a href="#">시설 현황</a></li>
-                    <li><a href="map.html">오시는 길</a></li>
+                    <li><a href="map.php">오시는 길</a></li>
                 </ul>
             </li>
             <li>
@@ -305,24 +305,24 @@ session_start();
             <li>
                 구인 & 구직
                 <ul>
-                    <li><a href="area.html">지역별</a></li>
+                    <li><a href="area.php">지역별</a></li>
                     <li><a href="#">자격증별</a></li>
                 </ul>
             </li>
             <li>
                 드론 관련 기업
                 <ul>
-                    <li><a href="review.html">기업 리뷰</a></li>
+                    <li><a href="review.php">기업 리뷰</a></li>
                     <li><a href="#">면접 후기</a></li>
                 </ul>
             </li>
             <li>
                 커뮤니티
                 <ul>
-                    <li><a href="everything.html">전체글</a></li>
+                    <li><a href="everything.php">전체글</a></li>
                     <li><a href="#">HOT글</a></li>
                     <li><a href="#">주제별</a></li>
-                    <li><a href="ask.html">1대1 질문 게시판</a></li>
+                    <li><a href="ask.php">1대1 질문 게시판</a></li>
                 </ul>
             </li>
             <li>
