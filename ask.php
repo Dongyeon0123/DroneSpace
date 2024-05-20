@@ -98,7 +98,7 @@ $conn->close();
             justify-content: space-between;
             align-items: center;
             background-color: #fff;
-            padding: 10px 35px;
+            padding: 7px 35px;
             border-bottom: 2px solid #000;
         }
         .header img {
@@ -106,6 +106,7 @@ $conn->close();
             height: 90px;
             margin: 0;
             margin-left: 100px;
+            margin-top: 3px;
         }
         .header a {
             text-decoration: none;
