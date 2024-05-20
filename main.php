@@ -97,13 +97,12 @@ session_start();
             color: black;
         }
         .search-container {
-            background-color: #fff;
             text-align: center;
             padding: 20px;
-            margin-top: 20px;
+            padding-bottom: 2px;
         }
         #searchInput {
-            padding: 13px 50px;
+            padding: 18px 50px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 14px;
@@ -114,7 +113,7 @@ session_start();
             border-color: blue;
         }
         #searchButton {
-            padding: 13px 15px;
+            padding: 19px 20px;
             background-color: #007bff;
             color: white;
             border: none;
@@ -283,7 +282,6 @@ session_start();
                     <li><a href="hello.php">인사말</a></li>
                     <li><a href="#">DroneSpace 연혁</a></li>
                     <li><a href="#">아카데미 비전</a></li>
-                    <li><a href="#">인증서</a></li>
                     <li><a href="#">시설 현황</a></li>
                     <li><a href="map.php">오시는 길</a></li>
                 </ul>
