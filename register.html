@@ -16,6 +16,11 @@ body {
   align-items: center;
   height: 100vh;
 }
+img {
+  width: 200px;
+  height: 80px;
+  margin-left: 38px;
+}
 .container {
   background-color: #fff;
   padding: 20px;
@@ -101,6 +106,7 @@ function validateForm() {
 </head>
 <body>
 <div class="container">
+  <a href="main.php"><img src="logo.png"></a>
   <h2>회원가입</h2>
   <form action="register.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
     <div class="input-group">

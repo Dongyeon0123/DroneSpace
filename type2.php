@@ -285,6 +285,15 @@ session_start();
                     <a href="login.html" style="color: black;">로그인 / 회원가입</a>
                 <?php endif; ?>
             </li>
+            <li>
+                마이 페이지
+                <ul>
+                    <li><a href="#">내가 작성한 게시글</a></li>
+                    <li><a href="#">내가 작성한 댓글</a></li>
+                    <li><a href="#">구인&구직 신청 현황</a></li>
+                    <li><a href="#">내 자격증 현황</a></li>
+                </ul>
+            </li>
         </ul>
         <div class="hamburger" onclick="toggleMenu()">
             <div></div>
@@ -482,6 +491,15 @@ session_start();
                     </ul>
                 </li>
                 <li><a href="login.html" style="color: black;">로그인 / 회원가입</a></li>
+                <li>
+                마이 페이지
+                <ul>
+                    <li><a href="#">내가 작성한 게시글</a></li>
+                    <li><a href="#">내가 작성한 댓글</a></li>
+                    <li><a href="#">구인&구직 신청 현황</a></li>
+                    <li><a href="#">내 자격증 현황</a></li>
+                </ul>
+            </li>
             </ul>
         </div>
     </div>

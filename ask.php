@@ -1,10 +1,8 @@
 <?php
-// 세션 시작
 session_start();
 
-// 로그인 상태 확인
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login.html");
+    echo "<script>alert('로그인이 필요합니다.'); window.location.href='login.html';</script>";
     exit;
 }
 
@@ -15,28 +13,22 @@ $password = "skso1951";
 $dbname = "dbwork";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 $conn->set_charset("utf8");
 
 // 게시글 저장
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['question'])) {
-    $username = $_SESSION['memberid'];
+    $username = $_SESSION['memberid'] ?? $_SESSION['adminid']; // 세션에서 사용자 ID 가져오기
     $question = $_POST['question'];
 
     $stmt = $conn->prepare("INSERT INTO questions (username, question) VALUES (?, ?)");
     $stmt->bind_param("ss", $username, $question);
-
-    if ($stmt->execute()) {
-        $_SESSION['message'] = "질문이 성공적으로 등록되었습니다.";
-    } else {
-        $_SESSION['message'] = "질문 등록에 실패했습니다.";
-    }
-
+    $stmt->execute();
     $stmt->close();
+
+    $_SESSION['message'] = "질문이 성공적으로 등록되었습니다.";
     header("Location: ask.php");
     exit;
 }
@@ -47,21 +39,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_id'])) {
 
     $stmt = $conn->prepare("DELETE FROM questions WHERE id = ?");
     $stmt->bind_param("i", $delete_id);
-
-    if ($stmt->execute()) {
-        $_SESSION['message'] = "질문이 성공적으로 삭제되었습니다.";
-    } else {
-        $_SESSION['message'] = "질문 삭제에 실패했습니다.";
-    }
-
+    $stmt->execute();
     $stmt->close();
+
+    $_SESSION['message'] = "질문이 성공적으로 삭제되었습니다.";
     header("Location: ask.php");
     exit;
 }
 
 // 게시글 불러오기
 $questions = [];
-$result = $conn->query("SELECT id, username, question, created_at FROM questions ORDER BY created_at DESC");
+$query = "SELECT q.id, q.username, q.question, q.created_at, r.reply, r.adminid 
+          FROM questions q 
+          LEFT JOIN replies r ON q.id = r.questionid ";
+
+if (!isset($_SESSION['adminid'])) {
+    $query .= "WHERE q.username = '" . $conn->real_escape_string($_SESSION['memberid']) . "' ";
+}
+
+$query .= "ORDER BY q.created_at DESC";
+
+$result = $conn->query($query);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -71,6 +69,7 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -404,6 +403,15 @@ $conn->close();
                     <a href="login.html" style="color: black;">로그인 / 회원가입</a>
                 <?php endif; ?>
             </li>
+            <li>
+                마이 페이지
+                <ul>
+                    <li><a href="#">내가 작성한 게시글</a></li>
+                    <li><a href="#">내가 작성한 댓글</a></li>
+                    <li><a href="#">구인&구직 신청 현황</a></li>
+                    <li><a href="#">내 자격증 현황</a></li>
+                </ul>
+            </li>
         </ul>
         <div class="hamburger" onclick="toggleMenu()">
             <div></div>
@@ -421,17 +429,14 @@ $conn->close();
     <section class="main-content container">
         <?php if (isset($_SESSION['message'])): ?>
             <div class="alert">
-                <script>
-                    alert("<?php echo $_SESSION['message']; ?>");
-                </script>
+                <script>alert("<?php echo $_SESSION['message']; ?>");</script>
                 <?php unset($_SESSION['message']); ?>
             </div>
         <?php endif; ?>
 
         <form id="questionForm" method="post" action="ask.php">
-            <input type="hidden" id="username" name="username" value="<?php echo htmlspecialchars($_SESSION['memberid']); ?>">
             <label for="question">질문:</label>
-            <textarea id="question" name="question" class="question" rows="4" required></textarea>
+            <textarea id="question" name="question" required></textarea>
             <button type="submit">질문 등록</button>
         </form>
 
@@ -441,6 +446,22 @@ $conn->close();
                 <div class="question-item">
                     <h3><?php echo htmlspecialchars($question['username']); ?></h3>
                     <p><?php echo nl2br(htmlspecialchars($question['question'])); ?></p>
+                    <?php if (isset($_SESSION['adminid'])): ?>
+                        <!-- 관리자용 답변 입력란 -->
+                        <form method="post" action="reply.php">
+                            <input type="hidden" name="questionid" value="<?php echo $question['id']; ?>">
+                            <textarea name="reply" required></textarea>
+                            <button type="submit">답변 등록</button>
+                        </form>
+                    <?php endif; ?>
+                    <?php if (!empty($question['reply'])): ?>
+                        <!-- 관리자와 사용자에게 표시되는 답변 -->
+                        <div class="admin-reply">
+                            <strong>관리자 답변:</strong>
+                            <p><?php echo nl2br(htmlspecialchars($question['reply'])); ?></p>
+                            <p><strong>답변자:</strong> <?php echo htmlspecialchars($question['adminid']); ?></p>
+                        </div>
+                    <?php endif; ?>
                     <form method="post" action="ask.php" onsubmit="return confirmDelete(this)">
                         <input type="hidden" name="delete_id" value="<?php echo $question['id']; ?>">
                         <button type="submit" class="delete-button">삭제</button>
@@ -449,6 +470,7 @@ $conn->close();
             <?php endforeach; ?>
         </div>
     </section>
+
 
     <footer class="footer">
         <p>&copy; 2024 KDEC 한국드론교육센터. 모든 권리 보유.</p>
@@ -507,6 +529,15 @@ $conn->close();
                         <a href="login.html" style="color: black;">로그인 / 회원가입</a>
                     <?php endif; ?>
                 </li>
+                <li>
+                마이 페이지
+                <ul>
+                    <li><a href="#">내가 작성한 게시글</a></li>
+                    <li><a href="#">내가 작성한 댓글</a></li>
+                    <li><a href="#">구인&구직 신청 현황</a></li>
+                    <li><a href="#">내 자격증 현황</a></li>
+                </ul>
+            </li>
             </ul>
         </div>
     </div>
@@ -514,13 +545,11 @@ $conn->close();
     <script>
         function confirmDelete(form) {
             if (confirm("삭제하시겠습니까?")) {
-                // 폼 제출을 허용하고, 삭제 성공 메시지를 표시
                 form.onsubmit = function() {
                     alert("질문이 성공적으로 삭제되었습니다.");
                 };
                 return true;
             } else {
-                // 폼 제출을 중단
                 return false;
             }
         }
