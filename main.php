@@ -232,43 +232,66 @@ session_start();
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, rgba(241, 55, 55, 0.8), #3b3b3b);
+            background: linear-gradient(to right, rgba(225, 70, 60, 0.8), #3b3b3b);
+            display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             opacity: 0;
             visibility: hidden;
             transition: opacity 1s ease-in-out;
         }
+
         .menu-overlay.show {
-            display: flex;
             opacity: 1;
             visibility: visible;
         }
+
         .menu-overlay-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             text-align: center;
             color: white;
             width: 80%;
+            margin-top: 5%; /* 팝업 상단에서 조금 내려오도록 위치 조정 */
         }
+
         .menu-overlay-content ul {
             list-style-type: none;
             padding: 0;
-            font-size: 24px;
             margin: 0;
         }
+
+        .menu-overlay-content ul li {
+            font-size: 24px; /* 상위 메뉴 글자 크기 */
+            margin-bottom: 5px;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 5px;
+        }
+
         .menu-overlay-content ul li a {
             color: white;
             text-decoration: none;
-            display: block;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
         }
-        .menu-overlay-content ul li a:hover {
+
+        .menu-overlay-content ul li ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 5px;
+            padding: 0;
+        }
+
+        .menu-overlay-content ul li ul li {
+            font-size: 18px; /* 하위 메뉴 글자 크기 */
+            padding: 5px 10px;
+            background: none; /* 배경색 제거 */
+            margin: 2px;
+            border-radius: 5px;
+        }
+
+        .menu-overlay-content ul li ul li a:hover {
             background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -280,8 +303,8 @@ session_start();
                 기업 소개
                 <ul>
                     <li><a href="hello.php">인사말</a></li>
-                    <li><a href="#">DroneSpace 연혁</a></li>
-                    <li><a href="#">아카데미 비전</a></li>
+                    <li><a href="history.php">DroneSpace 연혁</a></li>
+                    <li><a href="vision.php">아카데미 비전</a></li>
                     <li><a href="#">시설 현황</a></li>
                     <li><a href="map.php">오시는 길</a></li>
                 </ul>
@@ -304,22 +327,22 @@ session_start();
                 구인 & 구직
                 <ul>
                     <li><a href="area.php">지역별</a></li>
-                    <li><a href="#">자격증별</a></li>
+                    <li><a href="certificate.php">자격증별</a></li>
                 </ul>
             </li>
             <li>
                 드론 관련 기업
                 <ul>
                     <li><a href="review.php">기업 리뷰</a></li>
-                    <li><a href="#">면접 후기</a></li>
+                    <li><a href="interview.php">면접 후기</a></li>
                 </ul>
             </li>
             <li>
                 커뮤니티
                 <ul>
                     <li><a href="everything.php">전체글</a></li>
-                    <li><a href="#">HOT글</a></li>
-                    <li><a href="#">주제별</a></li>
+                    <li><a href="hot.php">HOT글</a></li>
+                    <li><a href="subject.php">주제별</a></li>
                     <li><a href="ask.php">1대1 질문 게시판</a></li>
                 </ul>
             </li>
@@ -333,10 +356,10 @@ session_start();
             <li>
                 마이 페이지
                 <ul>
-                    <li><a href="#">내가 작성한 게시글</a></li>
-                    <li><a href="#">내가 작성한 댓글</a></li>
-                    <li><a href="#">구인&구직 신청 현황</a></li>
-                    <li><a href="#">내 자격증 현황</a></li>
+                    <li><a href="mywrite.php">내가 작성한 게시글</a></li>
+                    <li><a href="myreply.php">내가 작성한 댓글</a></li>
+                    <li><a href="application.php">구인&구직 신청 현황</a></li>
+                    <li><a href="mycer.php">내 자격증 현황</a></li>
                 </ul>
             </li>
         </ul>
@@ -468,8 +491,8 @@ session_start();
                 <li>기업 소개
                     <ul>
                         <li><a href="hello.html">인사말</a></li>
-                        <li><a href="#">DroneSpace 연혁</a></li>
-                        <li><a href="#">아카데미 비전</a></li>
+                        <li><a href="history.php">DroneSpace 연혁</a></li>
+                        <li><a href="vision.php">아카데미 비전</a></li>
                         <li><a href="#">인증서</a></li>
                         <li><a href="#">시설 현황</a></li>
                         <li><a href="#">오시는 길</a></li>
@@ -534,6 +557,13 @@ session_start();
             var menuOverlay = document.getElementById('menuOverlay');
             menuOverlay.classList.toggle('show');
         }
+        // 하위 메뉴 링크 클릭 시 메뉴 숨기기
+        document.querySelectorAll('.menu-overlay-content ul li ul li a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                var menuOverlay = document.getElementById('menuOverlay');
+                menuOverlay.classList.remove('show');
+            });
+        });
 
         const images = [
             'konkuk.jpg',
@@ -544,16 +574,16 @@ session_start();
 
         let currentIndex = 0;
 
-        function changeBackgroundImage() {
-            const contentBackground = document.querySelector('.content-background');
-            contentBackground.style.backgroundImage = `url(${images[currentIndex]})`;
-            currentIndex = (currentIndex + 1) % images.length;
-        }
-
         setInterval(changeBackgroundImage, 10000);
 
-        // Initialize the first image
-        changeBackgroundImage();
+        function changeBackgroundImage() {
+            const backgroundImageElement = document.querySelector('.content-background'); // 배경 이미지를 변경할 요소 선택
+            backgroundImageElement.style.backgroundImage = `url('${images[currentIndex]}')`; // 현재 인덱스의 이미지로 배경 설정
+            currentIndex = (currentIndex + 1) % images.length; // 다음 이미지 인덱스로 업데이트
+        }
+
+        setInterval(changeBackgroundImage, 10000); // 10초마다 changeBackgroundImage 함수 호출
+
 
         document.addEventListener('keydown', function(event) {
         if (event.metaKey && event.shiftKey && event.key === 'l') {
