@@ -136,9 +136,6 @@ session_start();
             width: 100%;
             height: 100%;
             background: linear-gradient(to right, rgba(1, 161, 91, 0.9), #3b3b3b);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
             opacity: 0;
             visibility: hidden;
             transition: opacity 1s ease-in-out;
@@ -161,25 +158,48 @@ session_start();
             visibility: visible;
         }
 
-        .menu-overlay-content {
-            text-align: center;
-            color: white;
-            width: 80%;
-            margin-top: 5%; /* 팝업 상단에서 조금 내려오도록 위치 조정 */
+        .menu-overlay.show {
+            opacity: 1;
+            visibility: visible;
         }
 
+        .menu-overlay-content {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            padding: 16px 32px;
+            margin-top: 50px;
+            margin-left: 220px;
+            text-align: center;
+        }
+        .menu-overlay .image-container {
+            display: flex;
+            justify-content: center; /* 가로 중앙 정렬 */
+            width: 100%; /* 부모 컨테이너의 전체 너비 사용 */
+        }
+
+        .menu-overlay img {
+            width: 320px;
+            height: 130px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            margin-top: 60px;
+        }
+        .menu-overlay-content h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 44px;
+            color: white;
+        }
         .menu-overlay-content ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
             margin: 0;
         }
 
         .menu-overlay-content ul li {
-            font-size: 24px; /* 상위 메뉴 글자 크기 */
-            margin-bottom: 5px;
-            padding: 10px;
-            background-color: rgba(0,0,0,0.5);
-            border-radius: 5px;
+            margin-bottom: 14px;
+            font-size: 18px;
         }
 
         .menu-overlay-content ul li a {
@@ -187,25 +207,10 @@ session_start();
             text-decoration: none;
         }
 
-        .menu-overlay-content ul li ul {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 5px;
-            padding: 0;
-        }
 
-        .menu-overlay-content ul li ul li {
-            font-size: 18px; /* 하위 메뉴 글자 크기 */
-            padding: 5px 10px;
-            background: none; /* 배경색 제거 */
-            margin: 2px;
-            border-radius: 5px;
-        }
-
-        .menu-overlay-content ul li ul li a:hover {
+        .menu-overlay-content ul li a:hover {
             background-color: rgba(255, 255, 255, 0.1);
-            padding: 5px;
+            padding: 7px;
             border-radius: 5px;
         }
         .main {
@@ -273,13 +278,6 @@ session_start();
                 </ul>
             </li>
             <li>
-                드론 관련 기업
-                <ul>
-                    <a href="review.php"><li>기업 리뷰</li></a>
-                    <a href="interview.php"><li>면접 후기</li></a>
-                </ul>
-            </li>
-            <li>
                 커뮤니티
                 <ul>
                     <a href="everything.php"><li>전체글</li></a>
@@ -330,73 +328,66 @@ session_start();
         <p>Copyright &copy; 2024 Drone Space</p>
     </footer>
     <div class="menu-overlay" id="menuOverlay">
-        <div class="menu-overlay-content">
-        <span class="close-btn" onclick="closeMenu()">X</span>
-            <ul>
-            <li>
-                기업 소개
-                <ul>
-                    <li><a href="hello.php">인사말</a></li>
-                    <li><a href="history.php">DroneSpace 연혁</a></li>
-                    <li><a href="vision.php">아카데미 비전</a></li>
-                    <li><a href="facility.php">시설 현황</a></li>
-                    <li><a href="map.php">오시는 길</a></li>
-                </ul>
-            </li>
-            <li>
-                국가 자격증
-                <ul>
-                    <li><a href="information.php">국가 자격증 안내</a></li>
-                    <li><a href="money.php">교육비 지원 안내</a></li>
-                    <li><a href="company.php">기관/단체 교육 안내</a></li>
-                    <li><a href="type1.php">1종 조종자 과정</a></li>
-                    <li><a href="type2.php">2종 조종자 과정</a></li>
-                    <li><a href="type3.php">3종 조종자 과정</a></li>
-                    <li><a href="education.php">드론 운용자 교육</a></li>
-                    <li><a href="instructor.php">지도 조종자 과정</a></li>
-                    <li><a href="practical.php">실기 평가자 과정</a></li>
-                </ul>
-            </li>
-            <li>
-                구인 & 구직
-                <ul>
-                    <li><a href="area.php">지역별</a></li>
-                    <li><a href="certificate.php">자격증별</a></li>
-                </ul>
-            </li>
-            <li>
-                드론 관련 기업
-                <ul>
-                    <li><a href="review.php">기업 리뷰</a></li>
-                    <li><a href="interview.php">면접 후기</a></li>
-                </ul>
-            </li>
-            <li>
-                커뮤니티
-                <ul>
-                    <li><a href="everything.php">전체글</a></li>
-                    <li><a href="hot.php">HOT글</a></li>
-                    <li><a href="ask.php">1대1 질문 게시판</a></li>
-                </ul>
-            </li>
-            <li>
-                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
-                    <a href="logout.php" style="color: white;">로그아웃</a>
-                <?php else: ?>
-                    <a href="login.html" style="color: white;">로그인 / 회원가입</a>
-                <?php endif; ?>
-            </li>
-            <li>
-                마이 페이지
-                <ul>
-                    <li><a href="mywrite.php">내가 작성한 게시글</a></li>
-                    <li><a href="myreply.php">내가 작성한 댓글</a></li>
-                    <li><a href="application.php">구인&구직 신청 현황</a></li>
-                    <li><a href="mycer.php">내 자격증 현황</a></li>
-                </ul>
-            </li>
-            </ul>
+        <div class="image-container">
+            <a href="main.php"><img src="logo.png"></a>
         </div>
+        <div class="menu-overlay-content">
+            <span class="close-btn" onclick="closeMenu()">X</span>
+            <div>
+                <h2 style="color: red;">기업 소개</h2>
+                    <ul>
+                        <li><a href="hello.php">인사말</a></li>
+                        <li><a href="history.php">DroneSpace 연혁</a></li>
+                        <li><a href="vision.php">아카데미 비전</a></li>
+                        <li><a href="facility.php">시설 현황</a></li>
+                        <li><a href="map.php">오시는 길</a></li>
+                    </ul>
+            </div>
+            <div>
+                <h2>국가 자격증</h2>
+                    <ul>
+                        <li><a href="information.php">국가 자격증 안내</a></li>
+                        <li><a href="money.php">교육비 지원 안내</a></li>
+                        <li><a href="company.php">기관/단체 교육 안내</a></li>
+                        <li><a href="type1.php">1종 조종자 과정</a></li>
+                        <li><a href="type2.php">2종 조종자 과정</a></li>
+                        <li><a href="type3.php">3종 조종자 과정</a></li>
+                        <li><a href="education.php">드론 운용자 교육</a></li>
+                        <li><a href="instructor.php">지도 조종자 과정</a></li>
+                        <li><a href="practical.php">실기 평가자 과정</a></li>
+                    </ul>
+            </div>
+            <div>
+                <h2>구인 & 구직</h2>
+                    <ul>
+                        <li><a href="area.php">지역별</a></li>
+                        <li><a href="certificate.php">자격증별</a></li>
+                    </ul>
+            </div>
+            <div>
+                <h2>커뮤니티</h2>
+                    <ul>
+                        <li><a href="everything.php">전체글</a></li>
+                        <li><a href="hot.php">HOT글</a></li>
+                        <li><a href="ask.php">1대1 질문 게시판</a></li>
+                    </ul>
+            </div>
+            <div style="margin-top: 24px;">
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
+                    <a href="logout.php" style="color: white; font-size: 24px;">로그아웃</a>
+                <?php else: ?>
+                    <a href="login.html" style="color: white; font-size: 24px;">로그인 / 회원가입</a>
+                <?php endif; ?>
+            </div>
+            <div>
+                <h2>마이 페이지</h2>
+                    <ul>
+                        <li><a href="mywrite.php">내가 작성한 게시글</a></li>
+                        <li><a href="myreply.php">내가 작성한 댓글</a></li>
+                        <li><a href="application.php">구인&구직 신청 현황</a></li>
+                        <li><a href="mycer.php">내 자격증 현황</a></li>
+                    </ul>
+            </div>
     </div>
 
     <script>
