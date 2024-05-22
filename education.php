@@ -40,7 +40,9 @@ session_start();
         .header a {
             text-decoration: none;
         }
-
+        .menuli {
+            color: red;
+        }
         .menu {
             list-style-type: none;
             padding: 0;
@@ -58,20 +60,23 @@ session_start();
             position: absolute;
             top: 100%;
             left: 0;
-            display: none;
+            width: 175px;  /* 너비 조정이 필요하면 수정 */
             background-color: rgb(227, 227, 227);
-            margin: 0px;
             list-style: none;
             padding: 0;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
             border-top: 5px solid rgb(51, 179, 57);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1000; /* Ensures the submenu is above other content */
+            visibility: hidden;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s ease-in-out; /* 효과 지속시간과 타이밍 함수 조정 */
+            z-index: 1000;
         }
-
         .menu li:hover ul {
-            display: block;
+            visibility: visible;
+            opacity: 1;
         }
 
         .menu li:not(:last-child)::after {
@@ -110,7 +115,7 @@ session_start();
             color: white;
         }
 
-        .menu li:last-child a {
+        .menu a li {
             color: black;
         }
 
@@ -144,48 +149,78 @@ session_start();
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, rgba(241, 55, 55, 0.8), #3b3b3b);
+            background: linear-gradient(to right, rgba(1, 161, 91, 0.9), #3b3b3b);
+            display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             opacity: 0;
             visibility: hidden;
             transition: opacity 1s ease-in-out;
+            z-index: 1002;
         }
 
+        .close-btn {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            z-index: 101;  /* 메뉴 위에 보이도록 z-index 설정 */
+        }
+
+
         .menu-overlay.show {
-            display: flex;
             opacity: 1;
             visibility: visible;
         }
 
         .menu-overlay-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             text-align: center;
             color: white;
             width: 80%;
+            margin-top: 5%; /* 팝업 상단에서 조금 내려오도록 위치 조정 */
         }
 
         .menu-overlay-content ul {
             list-style-type: none;
             padding: 0;
-            font-size: 24px;
             margin: 0;
+        }
+
+        .menu-overlay-content ul li {
+            font-size: 24px; /* 상위 메뉴 글자 크기 */
+            margin-bottom: 5px;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 5px;
         }
 
         .menu-overlay-content ul li a {
             color: white;
             text-decoration: none;
-            display: block;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
         }
 
-        .menu-overlay-content ul li a:hover {
+        .menu-overlay-content ul li ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 5px;
+            padding: 0;
+        }
+
+        .menu-overlay-content ul li ul li {
+            font-size: 18px; /* 하위 메뉴 글자 크기 */
+            padding: 5px 10px;
+            background: none; /* 배경색 제거 */
+            margin: 2px;
+            border-radius: 5px;
+        }
+
+        .menu-overlay-content ul li ul li a:hover {
             background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            border-radius: 5px;
         }
         .showcase {
             background: #333 url('drone.jpg') no-repeat 0 -400px;
@@ -245,48 +280,47 @@ session_start();
         <li>
                 기업 소개
                 <ul>
-                    <li><a href="hello.php">인사말</a></li>
-                    <li><a href="history.php">DroneSpace 연혁</a></li>
-                    <li><a href="vision.php">아카데미 비전</a></li>
-                    <li><a href="facility.php">시설 현황</a></li>
-                    <li><a href="map.php">오시는 길</a></li>
+                    <a href="hello.php"><li>인사말</li></a>
+                    <a href="history.php"><li>DroneSpace 연혁</li></a>
+                    <a href="vision.php"><li>아카데미 비전</li></a>
+                    <a href="facility.php"><li>시설 현황</li></a>
+                    <a href="map.php"><li>오시는 길</li></a>
                 </ul>
             </li>
             <li>
-                국가 자격증
+            <span class="menuli">국가 자격증</span>
                 <ul>
-                    <li><a href="information.php">국가 자격증 안내</a></li>
-                    <li><a href="money.php">교육비 지원 안내</a></li>
-                    <li><a href="company.php">기관/단체 교육 안내</a></li>
-                    <li><a href="type1.php">1종 조종자 과정</a></li>
-                    <li><a href="type2.php">2종 조종자 과정</a></li>
-                    <li><a href="type3.php">3종 조종자 과정</a></li>
-                    <li><a href="education.php">드론 운용자 교육</a></li>
-                    <li><a href="instructor.php">지도 조종자 과정</a></li>
-                    <li><a href="practical.php">실기 평가자 과정</a></li>
+                    <a href="information.php"><li>국가 자격증 안내</li></a>
+                    <a href="money.php"><li>교육비 지원 안내</li></a>
+                    <a href="company.php"><li>기관/단체 교육 안내</li></a>
+                    <a href="type1.php"><li>1종 조종자 과정</li></a>
+                    <a href="type2.php"><li>2종 조종자 과정</li></a>
+                    <a href="type3.php"><li>3종 조종자 과정</li></a>
+                    <a href="education.php"><li>드론 운용자 교육</li></a>
+                    <a href="instructor.php"><li>지도 조종자 과정</li></a>
+                    <a href="practical.php"><li>실기 평가자 과정</li></a>
                 </ul>
             </li>
             <li>
                 구인 & 구직
                 <ul>
-                    <li><a href="area.php">지역별</a></li>
-                    <li><a href="certificate.php">자격증별</a></li>
+                    <a href="area.php"><li>지역별</li></a>
+                    <a href="certificate.php"><li>자격증별</li></a>
                 </ul>
             </li>
             <li>
                 드론 관련 기업
                 <ul>
-                    <li><a href="review.php">기업 리뷰</a></li>
-                    <li><a href="interview.php">면접 후기</a></li>
+                    <a href="review.php"><li>기업 리뷰</li></a>
+                    <a href="interview.php"><li>면접 후기</li></a>
                 </ul>
             </li>
             <li>
                 커뮤니티
                 <ul>
-                    <li><a href="everything.php">전체글</a></li>
-                    <li><a href="hot.php">HOT글</a></li>
-                    <li><a href="subject.php">주제별</a></li>
-                    <li><a href="ask.php">1대1 질문 게시판</a></li>
+                    <a href="everything.php"><li>전체글</li></a>
+                    <a href="hot.php"><li>HOT글</li></a>
+                    <a href="ask.php"><li>1대1 질문 게시판</li></a>
                 </ul>
             </li>
             <li>
@@ -299,10 +333,10 @@ session_start();
             <li>
                 마이 페이지
                 <ul>
-                    <li><a href="mywrite.php">내가 작성한 게시글</a></li>
-                    <li><a href="myreply.php">내가 작성한 댓글</a></li>
-                    <li><a href="application.php">구인&구직 신청 현황</a></li>
-                    <li><a href="mycer.php">내 자격증 현황</a></li>
+                    <a href="mywrite.php"><li>내가 작성한 게시글</li></a>
+                    <a href="myreply.php"><li>내가 작성한 댓글</li></a>
+                    <a href="application.php"><li>구인&구직 신청 현황</li></a>
+                    <a href="mycer.php"><li>내 자격증 현황</li></a>
                 </ul>
             </li>
         </ul>
@@ -370,6 +404,7 @@ session_start();
     </section>
     <div class="menu-overlay" id="menuOverlay">
         <div class="menu-overlay-content">
+        <span class="close-btn" onclick="closeMenu()">X</span>
             <ul>
             <li>
                 기업 소개
@@ -414,15 +449,14 @@ session_start();
                 <ul>
                     <li><a href="everything.php">전체글</a></li>
                     <li><a href="hot.php">HOT글</a></li>
-                    <li><a href="subject.php">주제별</a></li>
                     <li><a href="ask.php">1대1 질문 게시판</a></li>
                 </ul>
             </li>
             <li>
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
-                    <a href="logout.php" style="color: black;">로그아웃</a>
+                    <a href="logout.php" style="color: white;">로그아웃</a>
                 <?php else: ?>
-                    <a href="login.html" style="color: black;">로그인 / 회원가입</a>
+                    <a href="login.html" style="color: white;">로그인 / 회원가입</a>
                 <?php endif; ?>
             </li>
             <li>
@@ -441,6 +475,10 @@ session_start();
         function toggleMenu() {
             var menuOverlay = document.getElementById('menuOverlay');
             menuOverlay.classList.toggle('show');
+        }
+        function closeMenu() {
+            var menuOverlay = document.getElementById('menuOverlay');
+            menuOverlay.classList.remove('show');  // 'show' 클래스를 제거하여 팝업 숨김
         }
     </script>
 </body>
