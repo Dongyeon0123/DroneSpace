@@ -2,15 +2,16 @@
 // 세션 시작
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3종 과정</title>
+    <title>Drone Space 비전</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -18,7 +19,7 @@ session_start();
         }
         .container {
             width: 80%;
-            margin: auto;
+            margin: 0 auto;
             overflow: hidden;
         }
         .header {
@@ -26,34 +27,30 @@ session_start();
             justify-content: space-between;
             align-items: center;
             background-color: #fff;
-            padding: 10px 35px;
+            padding: 7px 35px;
             border-bottom: 2px solid #000;
         }
-
         .header img {
             width: 200px;
             height: 90px;
-            margin: 0;
             margin-left: 100px;
+            margin-top: 2.8px;
         }
-
         .header a {
             text-decoration: none;
         }
-
         .menu {
             list-style-type: none;
             padding: 0;
             display: flex;
             font-weight: bold;
+            margin-top: 20px;
         }
-
         .menu li {
             position: relative;
             padding: 10px;
             cursor: pointer;
         }
-
         .menu li ul {
             position: absolute;
             top: 100%;
@@ -69,52 +66,42 @@ session_start();
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 1000; /* Ensures the submenu is above other content */
         }
-
         .menu li:hover ul {
             display: block;
         }
-
         .menu li:not(:last-child)::after {
             content: "|";
             color: rgb(156, 154, 154);
             margin-left: 30px;
             margin-right: 20px;
         }
-
         .menu li ul li:not(:last-child)::after {
             content: none;
         }
-
         .menu li ul li {
             width: 145px;
             padding: 15px;
             text-align: center;
         }
-
         .menu li ul li:hover {
             background-color: rgb(51, 179, 57);
             color: white;
         }
-
         .menu li ul li:last-child {
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
         }
-
         .menu li ul li a {
             color: black;
             text-decoration: none;
         }
-
         .menu li ul li a:hover {
             color: white;
         }
-
         .menu li:last-child a {
             color: black;
         }
-
-	   .hamburger {
+        .hamburger {
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -123,21 +110,18 @@ session_start();
             cursor: pointer;
             z-index: 1001;
         }
-
         .hamburger div {
             width: 100%;
             height: 3px;
             background-color: #333;
             transition: all 0.3s ease-in-out;
         }
-
         .hamburger:hover div:nth-child(1) {
             width: 50%;
         }
         .hamburger:hover div:nth-child(3) {
             width: 50%;
         }
-
         .menu-overlay {
             position: fixed;
             top: 0;
@@ -151,13 +135,11 @@ session_start();
             visibility: hidden;
             transition: opacity 1s ease-in-out;
         }
-
         .menu-overlay.show {
             display: flex;
             opacity: 1;
             visibility: visible;
         }
-
         .menu-overlay-content {
             position: absolute;
             top: 50%;
@@ -167,14 +149,12 @@ session_start();
             color: white;
             width: 80%;
         }
-
         .menu-overlay-content ul {
             list-style-type: none;
             padding: 0;
             font-size: 24px;
             margin: 0;
         }
-
         .menu-overlay-content ul li a {
             color: white;
             text-decoration: none;
@@ -183,46 +163,97 @@ session_start();
             border-radius: 5px;
             transition: background-color 0.3s;
         }
-
         .menu-overlay-content ul li a:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
-        .showcase {
-            background: #333 url('drone.jpg') no-repeat 0 -400px;
+        .vision-section {
             text-align: center;
-            color: #fff;
+            padding: 50px 20px;
+            background-color: #fff;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .showcase h1 {
-            margin-top: 50px;
-            font-size: 55px;
+        .vision-section h2 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+            display: inline-block;
+            border-bottom: 3px solid #333; /* 글자 색상과 일치하는 밑줄 색상 */
+        }
+        .vision-banner {
+            background: url('path-to-your-image.png') no-repeat center center/cover;
+            color: white;
+            padding: 60px 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .vision-banner::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            z-index: 1;
+        }
+        .vision-banner p {
+            font-size: 1.2em;
+            line-height: 1.5em;
+            margin: 0;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        .vision-banner .main-quote {
+            font-size: 1.8em; /* 폰트 크기 1.5배로 설정 */
+        }
+        .vision-items {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .vision-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            margin: 10px;
+            max-width: 250px;
+            transition: transform 0.3s ease;
+        }
+        .vision-item:hover {
+            transform: translateY(-10px);
+        }
+        .vision-item img {
+            width: 50px;
+            height: 50px;
+        }
+        .vision-item .sub-quote {
+            font-size: 1.3em; /* 폰트 크기 1.3배로 설정 */
+            color: #0779e4;
+            font-weight: bold;
             margin-bottom: 10px;
         }
-        .showcase p {
-            font-size: 20px;
-            margin-bottom: 50px;
+        .vision-item .description {
+            font-size: 1em; /* 본문 내용은 기본 폰트 크기 */
+            color: #333;
+            font-weight: normal;
         }
-        .main-content {
-            padding: 20px;
-            background: #fff;
-        }
-        .main-content h2 {
-            margin-top: 0;
-        }
-        .main-content ul {
-            list-style: none;
-            padding: 0;
-        }
-        .main-content ul li {
-            background: #eee;
-            margin: 5px 0;
-            padding: 10px;
-        }
-        .footer {
+        footer {
             background: #333;
             color: #fff;
             text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
+            padding: 30px;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -230,7 +261,7 @@ session_start();
     <header class="header">
         <a href="main.php"><img src="logo.png"></a>
         <ul class="menu">
-        <li>
+            <li>
                 기업 소개
                 <ul>
                     <li><a href="hello.php">인사말</a></li>
@@ -300,139 +331,41 @@ session_start();
             <div></div>
         </div>
     </header>
-    <section class="showcase">
-        <div class="container">
-            <h1>드론 국가자격증 3종 과정</h1>
-            <p>드론 조종 및 운용에 대한 깊이 있는 이해와 전문적인 기술 습득을 목표로 합니다.</p>
+
+    <section class="vision-section">
+        <h2>Drone Space 비전</h2>
+        <div class="vision-banner">
+            <p class="main-quote">"드론일자리 창출을 통한 사회적 가치 창출"</p>
+            <br>
+            <p>드론 기술의 선도자가 되어, 우리는 지속 가능한 미래와 기술 혁신을 위해 정보의 집합체를 만든다.<br>전문 지식과 드론시장의 동향을 파악하여 드론 산업의 다양한 연구를 충족시킬 수 있도록 지원하며, 실질적인 기회를 제공합니다.</p>
+        </div>
+        <div class="vision-items">
+            <div class="vision-item">
+                <img src="icon1.png" >
+                <p class="sub-quote">정보제공을 통한 혁신</p>
+                <p class="description">보다 더 전문적인 정보를 제공하여 기술적 진입장벽을 낮추겠습니다.</p>
+            </div>
+            <div class="vision-item">
+                <img src="icon2.png" >
+                <p class="sub-quote">구인구직 중개시스템 구축</p>
+                <p class="description">구인자는 사이트를 통해 검증된 <br>구직자를 구할 수 있습니다.</p>
+            </div>
+            <div class="vision-item">
+                <img src="icon3.png" >
+                <p class="sub-quote">상호평가 시스템</p>
+                <p class="description">사이트 이용자간 평가를 통해 <br>개인 신뢰도 반영합니다.</p>
+            </div>
+            <div class="vision-item">
+                <img src="icon4.png" >
+                <p class="sub-quote">무한한 성장가능성</p>
+                <p class="description">최신기술의 트랜드 파악과 학습을 통해 앞으로의 변화를 예측하여 <br>선도하겠습니다.</p>
+            </div>
         </div>
     </section>
-    <section class="main-content container">
-        <h2>취득 시 운용 가능 기체</h2>
-        <p>2kg이상 ~ 7kg미만</p>
-        
-        <h2>취득 시 활용 분야</h2>
-        <ul>
-            <li>관공서 공공기관 취업</li>
-            <li>드론촬영</li>
-            <li>드론제작/ 개발/ 정비/교육 등</li>
-        </ul>
-        
-        <h2>전문 교육과정 안내</h2>
-        <p>드론 조종 및 운용에 대한 깊이 있는 이해와 전문적인 기술 습득을 목표로 합니다.</p>
-        
-        <h3>장점</h3>
-        <ul>
-            <li>체계적이고 깊이 있는 교육 커리큘럼으로 전문 지식 습득</li>
-            <li>실제 비행 실습을 통한 실전 경험 제공</li>
-            <li>다양한 드론 운용 시나리오에 대한 이해 증진</li>
-            <li>드론 기술의 최신 트렌드와 안전 규정 학습</li>
-        </ul>
-        
-        <h3>단점</h3>
-        <ul>
-            <li>상대적으로 긴 교육 기간 요구</li>
-            <li>속성 과정에 비해 높은 교육 비용 발생 가능성</li>
-            <li>일정한 시간 투자가 필요하여 바쁜 일정의 학습자에게 부담</li>
-            <li>학과시험에 대한 부담이 적어 자칫 이론 수업 부진이 올 수 있음</li>
-        </ul>
-        
-        <h3>전문 교육 과정 상세 내용</h3>
-        <table border="1" cellspacing="0" cellpadding="10">
-            <tr>
-                <th>과정</th>
-                <th>시간</th>
-                <th>내용</th>
-            </tr>
-            <tr>
-                <td>학과 교육</td>
-                <td>20시간 (필수 교육)</td>
-                <td>
-                    이론 항공법규 2시간<br>
-                    항공역학 / 비행이론 5시간<br>
-                    항공기상 2시간<br>
-                    비행운용 이론 11시간<br>
-                    (자체 시험, 교통안전공단 학과시험 면제)
-                </td>
-            </tr>
-            <tr>
-                <td>모의비행교육</td>
-                <td>6시간</td>
-                <td>시뮬레이션 기체 및 입문용 드론 교육</td>
-            </tr>
-            <tr>
-                <td>실기교육</td>
-                <td>6시간</td>
-                <td>
-                    1. 조종기 조작법<br>
-                    2. 이륙비행<br>
-                    3. 직진 및 후진 수평비행<br>
-                    4. 삼각비행<br>
-                    (드론아카데미 차체비행장 실기시험 응시)
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">총 교육시간 32시간 (필수)</td>
-            </tr>
-        </table>
-        
-        <h2>속성 교육과정 안내</h2>
-        <p>짧은 시간 내에 드론 조종과 기본 운용 능력을 배울 수 있는 집중 과정입니다.</p>
-        
-        <h3>장점</h3>
-        <ul>
-            <li>짧은 기간 내에 드론 조종 기초 습득</li>
-            <li>자격증 취득을 위한 실질적인 준비 과정</li>
-            <li>시간적, 경제적 부담 감소</li>
-            <li>바쁜 일정을 가진 학습자에게 유연한 학습 기회 제공</li>
-        </ul>
-        
-        <h3>단점</h3>
-        <ul>
-            <li>전문 교육 과정에 비해 상대적으로 얕은 지식 습득</li>
-            <li>심화 학습과 다양한 실습 기회 부족</li>
-            <li>전문적인 드론 운용 능력 향상에 한계 있을 수 있음</li>
-            <li>학과 시험을 교육센터 외 장소에 치러야 한다는 부담감이 있음</li>
-        </ul>
-        
-        <h3>속성 교육 과정 상세 내용</h3>
-        <table border="1" cellspacing="0" cellpadding="10">
-            <tr>
-                <th>과정</th>
-                <th>시간</th>
-                <th>내용</th>
-            </tr>
-            <tr>
-                <td>학과 교육</td>
-                <td>6시간 (선택교육 5인 이상)</td>
-                <td>
-                    이론 항공법규 1시간<br>
-                    항공역학 / 비행이론 2시간<br>
-                    항공기상 1시간<br>
-                    비행운용 이론 2시간<br>
-                    (교통안전공단 학과시험)
-                </td>
-            </tr>
-            <tr>
-                <td>모의비행교육</td>
-                <td>3시간 (필수)</td>
-                <td>시뮬레이션 기체 및 입문용 드론 교육</td>
-            </tr>
-            <tr>
-                <td>실기교육</td>
-                <td>6시간 (필수)</td>
-                <td>
-                    1. 조종기 조작법<br>
-                    2. 이륙비행<br>
-                    3. 직진 및 후진 수평비행<br>
-                    4. 삼각비행<br>
-                    (교육원 차체비행장 실기시험 응시)
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">총교육시간 15시간 (필수 9시간 선택 6시간)</td>
-            </tr>
-        </table>
-    </section>
+
+    <footer>
+        <p>&copy; 2024 Drone Space</p>
+    </footer>
     <div class="menu-overlay" id="menuOverlay">
         <div class="menu-overlay-content">
             <ul>
@@ -502,6 +435,7 @@ session_start();
             </ul>
         </div>
     </div>
+
     <script>
         function toggleMenu() {
             var menuOverlay = document.getElementById('menuOverlay');

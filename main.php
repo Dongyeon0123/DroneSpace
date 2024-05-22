@@ -305,7 +305,7 @@ session_start();
                     <li><a href="hello.php">인사말</a></li>
                     <li><a href="history.php">DroneSpace 연혁</a></li>
                     <li><a href="vision.php">아카데미 비전</a></li>
-                    <li><a href="#">시설 현황</a></li>
+                    <li><a href="facility.php">시설 현황</a></li>
                     <li><a href="map.php">오시는 길</a></li>
                 </ul>
             </li>
@@ -488,64 +488,67 @@ session_start();
     <div class="menu-overlay" id="menuOverlay">
         <div class="menu-overlay-content">
             <ul>
-                <li>기업 소개
-                    <ul>
-                        <li><a href="hello.html">인사말</a></li>
-                        <li><a href="history.php">DroneSpace 연혁</a></li>
-                        <li><a href="vision.php">아카데미 비전</a></li>
-                        <li><a href="#">인증서</a></li>
-                        <li><a href="#">시설 현황</a></li>
-                        <li><a href="#">오시는 길</a></li>
-                        <li><a href="#">전체 교육 과정 안내</a></li>
-                    </ul>
-                </li>
-                <li>국가 자격증
-                    <ul>
-                        <li><a href="nformation.html">국가 자격증 안내</a></li>
-                        <li><a href="#">교육비 지원 안내</a></li>
-                        <li><a href="#">기관/단체 교육 안내</a></li>
-                        <li><a href="type1.html">1종 조종자 과정</a></li>
-                        <li><a href="type2.html">2종 조종자 과정</a></li>
-                        <li><a href="type3.html">3종 조종자 과정</a></li>
-                        <li><a href="#">드론 운용자 교육</a></li>
-                        <li><a href="#">지도 조종자 과정</a></li>
-                        <li><a href="#">실기 평가자 과정</a></li>
-                    </ul>
-                </li>
-                <li>구인 & 구직
-                    <ul>
-                        <li><a href="area.html">지역별</a></li>
-                        <li><a href="#">자격증별</a></li>
-                    </ul>
-                </li>
-                <li>드론 관련 기업
-                    <ul>
-                        <li><a href="review.html">기업 리뷰</a></li>
-                        <li><a href="#">면접 후기</a></li>
-                    </ul>
-                </li>
-                <li>커뮤니티
-                    <ul>
-                        <li><a href="everything.html">전체글</a></li>
-                        <li><a href="#">HOT글</a></li>
-                        <li><a href="#">주제별</a></li>
-                        <li><a href="#">1대1 질문 게시판</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
-                        <a href="logout.php" style="color: black;">로그아웃</a>
-                    <?php else: ?>
-                        <a href="login.html" style="color: black;">로그인 / 회원가입</a>
-                    <?php endif; ?>
-                </li>
-                <li>
+            <li>
+                기업 소개
+                <ul>
+                    <li><a href="hello.php">인사말</a></li>
+                    <li><a href="history.php">DroneSpace 연혁</a></li>
+                    <li><a href="vision.php">아카데미 비전</a></li>
+                    <li><a href="facility.php">시설 현황</a></li>
+                    <li><a href="map.php">오시는 길</a></li>
+                </ul>
+            </li>
+            <li>
+                국가 자격증
+                <ul>
+                    <li><a href="information.php">국가 자격증 안내</a></li>
+                    <li><a href="money.php">교육비 지원 안내</a></li>
+                    <li><a href="company.php">기관/단체 교육 안내</a></li>
+                    <li><a href="type1.php">1종 조종자 과정</a></li>
+                    <li><a href="type2.php">2종 조종자 과정</a></li>
+                    <li><a href="type3.php">3종 조종자 과정</a></li>
+                    <li><a href="education.php">드론 운용자 교육</a></li>
+                    <li><a href="instructor.php">지도 조종자 과정</a></li>
+                    <li><a href="practical.php">실기 평가자 과정</a></li>
+                </ul>
+            </li>
+            <li>
+                구인 & 구직
+                <ul>
+                    <li><a href="area.php">지역별</a></li>
+                    <li><a href="certificate.php">자격증별</a></li>
+                </ul>
+            </li>
+            <li>
+                드론 관련 기업
+                <ul>
+                    <li><a href="review.php">기업 리뷰</a></li>
+                    <li><a href="interview.php">면접 후기</a></li>
+                </ul>
+            </li>
+            <li>
+                커뮤니티
+                <ul>
+                    <li><a href="everything.php">전체글</a></li>
+                    <li><a href="hot.php">HOT글</a></li>
+                    <li><a href="subject.php">주제별</a></li>
+                    <li><a href="ask.php">1대1 질문 게시판</a></li>
+                </ul>
+            </li>
+            <li>
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
+                    <a href="logout.php" style="color: black;">로그아웃</a>
+                <?php else: ?>
+                    <a href="login.html" style="color: black;">로그인 / 회원가입</a>
+                <?php endif; ?>
+            </li>
+            <li>
                 마이 페이지
                 <ul>
-                    <li><a href="#">내가 작성한 게시글</a></li>
-                    <li><a href="#">내가 작성한 댓글</a></li>
-                    <li><a href="#">구인&구직 신청 현황</a></li>
-                    <li><a href="#">내 자격증 현황</a></li>
+                    <li><a href="mywrite.php">내가 작성한 게시글</a></li>
+                    <li><a href="myreply.php">내가 작성한 댓글</a></li>
+                    <li><a href="application.php">구인&구직 신청 현황</a></li>
+                    <li><a href="mycer.php">내 자격증 현황</a></li>
                 </ul>
             </li>
             </ul>
@@ -573,8 +576,6 @@ session_start();
         ];
 
         let currentIndex = 0;
-
-        setInterval(changeBackgroundImage, 10000);
 
         function changeBackgroundImage() {
             const backgroundImageElement = document.querySelector('.content-background'); // 배경 이미지를 변경할 요소 선택
