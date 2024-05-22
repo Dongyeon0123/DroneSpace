@@ -1,10 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    echo "<script>alert('로그인이 필요합니다.'); window.location.href='login.html';</script>";
-    exit;
-}
+// PHP 시간대 설정
+date_default_timezone_set('Asia/Seoul');
 
 // 데이터베이스 연결 설정
 $servername = "localhost";
@@ -16,6 +14,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+// MySQL 시간대 설정
+$conn->query("SET time_zone = '+09:00'");
+
 $conn->set_charset("utf8");
 
 // 게시글 저장
@@ -49,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_id'])) {
 
 // 게시글 불러오기
 $questions = [];
-$query = "SELECT q.id, q.username, q.question, q.created_at, r.reply, r.adminid 
+$query = "SELECT q.id, q.username, q.question, q.created_at as question_created_at, r.reply, r.adminid, r.created_at as reply_created_at
           FROM questions q 
           LEFT JOIN replies r ON q.id = r.questionid ";
 
@@ -479,6 +481,7 @@ $conn->close();
                 <div class="question-item">
                     <h3><?php echo htmlspecialchars($question['username']); ?></h3>
                     <p><?php echo nl2br(htmlspecialchars($question['question'])); ?></p>
+                    <p>질문 등록 시간: <?php echo date('Y-m-d H:i', strtotime($question['question_created_at'])); ?></p>
                     <?php if (isset($_SESSION['adminid'])): ?>
                         <!-- 관리자용 답변 입력란 -->
                         <form method="post" action="reply.php">
@@ -493,6 +496,7 @@ $conn->close();
                             <strong>관리자 답변:</strong>
                             <p><?php echo nl2br(htmlspecialchars($question['reply'])); ?></p>
                             <p><strong>답변자:</strong> <?php echo htmlspecialchars($question['adminid']); ?></p>
+                            <p>답변 등록 시간: <?php echo date('Y-m-d H:i', strtotime($question['reply_created_at'])); ?></p>
                         </div>
                     <?php endif; ?>
                     <form method="post" action="ask.php" onsubmit="return confirmDelete(this)">
