@@ -4,6 +4,12 @@ session_start();
 // PHP 시간대 설정
 date_default_timezone_set('Asia/Seoul');
 
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // 로그인 페이지로 리디렉트 전에 JavaScript를 사용하여 경고 메시지 표시
+    echo "<script>alert('로그인이 필요합니다.'); window.location.href='login.html';</script>";
+    exit;
+}
+
 // 데이터베이스 연결 설정
 $servername = "localhost";
 $username = "root";
@@ -444,7 +450,7 @@ $conn->close();
                     <a href="mywrite.php"><li>내가 작성한 게시글</li></a>
                     <a href="myreply.php"><li>내가 작성한 댓글</li></a>
                     <a href="application.php"><li>구인&구직 신청 현황</li></a>
-                    <a href="mycer.php"><li>내 자격증 현황</li></a>
+                    <a href="mycer.php"><li>내 이력서</li></a>
                 </ul>
             </li>
         </ul>
@@ -570,7 +576,7 @@ $conn->close();
                         <li><a href="mywrite.php">내가 작성한 게시글</a></li>
                         <li><a href="myreply.php">내가 작성한 댓글</a></li>
                         <li><a href="application.php">구인&구직 신청 현황</a></li>
-                        <li><a href="mycer.php">내 자격증 현황</a></li>
+                        <li><a href="mycer.php">내 이력서</a></li>
                     </ul>
             </div>
     </div>

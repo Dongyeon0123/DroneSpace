@@ -298,7 +298,7 @@ session_start();
                     <a href="mywrite.php"><li>내가 작성한 게시글</li></a>
                     <a href="myreply.php"><li>내가 작성한 댓글</li></a>
                     <a href="application.php"><li>구인&구직 신청 현황</li></a>
-                    <a href="mycer.php"><li>내 자격증 현황</li></a>
+                    <a href="mycer.php"><li>내 이력서</li></a>
                 </ul>
             </li>
         </ul>
@@ -385,7 +385,7 @@ session_start();
                         <li><a href="mywrite.php">내가 작성한 게시글</a></li>
                         <li><a href="myreply.php">내가 작성한 댓글</a></li>
                         <li><a href="application.php">구인&구직 신청 현황</a></li>
-                        <li><a href="mycer.php">내 자격증 현황</a></li>
+                        <li><a href="mycer.php">내 이력서</a></li>
                     </ul>
             </div>
     </div>
