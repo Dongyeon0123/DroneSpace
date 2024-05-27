@@ -99,25 +99,10 @@ $conn->close();
             margin: 5px 0;
         }
         .resume-item img {
-            max-width: 100px;
+            width: 120px;
+            height: 150px;
             border-radius: 8px;
-        }
-        button {
-            padding: 5px 10px;
-            background-color: #5C67F2;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #4a54e1;
-        }
-        .delete-button {
-            background-color: #FF4B4B;
-        }
-        .delete-button:hover {
-            background-color: #D43F3F;
+            margin-top: 20px;
         }
         .hamburger {
             display: flex;
@@ -256,7 +241,7 @@ $conn->close();
             resize: vertical; /* 사용자가 세로 크기 조절 가능 */
         }
 
-        button {
+        .edit-button {
             background-color: #5C67F2;
             color: white;
             padding: 10px 20px;
@@ -264,9 +249,11 @@ $conn->close();
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-left: 530px;
+            margin-right: 10px;
         }
 
-        button:hover {
+        .edit-button:hover {
             background-color: #4a54e1; /* 버튼 호버 효과 */
         }
 
@@ -287,12 +274,11 @@ $conn->close();
         .delete-button {
             background-color: #FF4B4B;
             color: white;
-            padding: 5px 10px;
+            padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 10px;
         }
 
         .delete-button:hover {
@@ -316,27 +302,27 @@ $conn->close();
         <?php else: ?>
             <?php foreach ($resumes as $resume): ?>
             <div class="resume-item">
-                <h3><?= htmlspecialchars($resume['name']); ?></h3>
-                <p>생년월일: <?= htmlspecialchars($resume['birthdate']); ?></p>
-                <p>연락처: <?= htmlspecialchars($resume['phone']); ?></p>
-                <p>주소: <?= htmlspecialchars($resume['address']); ?></p>
-                <p>학력: <?= htmlspecialchars($resume['education_level']); ?></p>
+                <h3 style="font-size:24px;"><?= htmlspecialchars($resume['name']); ?></h3>
+                <span>생년월일: <?= htmlspecialchars($resume['birthdate']); ?></span><br>
+                <span>연락처: <?= htmlspecialchars($resume['phone']); ?></span><br>
+                <span>주소: <?= htmlspecialchars($resume['address']); ?></span><br>
+                <span>학력: <?= htmlspecialchars($resume['education_level']); ?></span><br>
                 <?php if ($resume['university_name']): ?>
-                <p>대학교명: <?= htmlspecialchars($resume['university_name']); ?></p>
+                <span>대학교명: <?= htmlspecialchars($resume['university_name']); ?></span><br>
                 <?php endif; ?>
-                <p>자격증: <?= htmlspecialchars($resume['certifications']); ?></p>
-                <p>경력:
+                <span>자격증: <?= htmlspecialchars($resume['certifications']); ?></span><br>
+                <span>경력:
                     <?php 
                     $experience = json_decode($resume['experience'], true);
                     foreach ($experience as $exp) {
                         echo htmlspecialchars($exp['company']) . " (" . htmlspecialchars($exp['period']) . ") - " . htmlspecialchars($exp['duties']) . "<br>";
                     }
                     ?>
-                </p>
+                </span><br>
                 <?php if ($resume['resume_photo']): ?>
-                <img src="<?= htmlspecialchars($resume['resume_photo']); ?>" alt="이력서 사진">
+                    <img src="<?= htmlspecialchars($resume['resume_photo']); ?>" alt="이력서 사진">
                 <?php endif; ?>
-                <button onclick="location.href='edit_resume.php?id=<?= $resume['resume_id']; ?>'">수정</button>
+                <button class="edit-button" onclick="location.href='edit_resume.php?id=<?= $resume['resume_id']; ?>'">수정</button>
                 <button class="delete-button" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='delete_resume.php?id=<?= $resume['id']; ?>'">삭제</button>
             </div>
             <?php endforeach; ?>
