@@ -21,6 +21,9 @@ body {
 .header a {
     text-decoration: none;
 }
+.menuli {
+    color: red;
+}
 .menu {
     list-style-type: none;
     padding: 0;

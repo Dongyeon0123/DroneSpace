@@ -10,16 +10,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "skso1951";
-$dbname = "dbwork";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-$conn->set_charset("utf8");
+require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $resume_id = $_POST['resume_id'];

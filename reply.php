@@ -4,21 +4,7 @@ session_start();
 // PHP 시간대 설정
 date_default_timezone_set('Asia/Seoul');
 
-// 데이터베이스 연결 설정
-$servername = "localhost";
-$username = "root";
-$password = "skso1951";
-$dbname = "dbwork";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// MySQL 시간대 설정
-$conn->query("SET time_zone = '+09:00'");
-
-$conn->set_charset("utf8");
+require_once 'db.php';
 
 // 답변 저장
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['reply'], $_POST['questionid'])) {

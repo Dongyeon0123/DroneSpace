@@ -10,21 +10,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-// 데이터베이스 연결 설정
-$servername = "localhost";
-$username = "root";
-$password = "skso1951";
-$dbname = "dbwork";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// MySQL 시간대 설정
-$conn->query("SET time_zone = '+09:00'");
-
-$conn->set_charset("utf8");
+require_once 'db.php';
 
 // 게시글 저장
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['question'])) {
@@ -199,39 +185,6 @@ $conn->close();
         .comment-form button {
             margin-top: 10px; /* 댓글 등록 버튼과 입력 칸 사이 간격 증가 */
         }
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 35px;
-            height: 30px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-        .hamburger div {
-            width: 100%;
-            height: 3px;
-            background-color: #333;
-            transition: all 0.3s ease-in-out;
-        }
-        .hamburger:hover div:nth-child(1) {
-            width: 50%;
-        }
-        .hamburger:hover div:nth-child(3) {
-            width: 50%;
-        }
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(1, 161, 91, 0.9), #3b3b3b);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 1s ease-in-out;
-            z-index: 1002;
-        }
 
         .close-btn {
             position: absolute;
@@ -241,63 +194,6 @@ $conn->close();
             font-size: 24px;
             color: white;
             z-index: 101;  /* 메뉴 위에 보이도록 z-index 설정 */
-        }
-
-
-        .menu-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .menu-overlay-content {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            padding: 16px 32px;
-            margin-top: 50px;
-            margin-left: 220px;
-            text-align: center;
-        }
-        .menu-overlay .image-container {
-            display: flex;
-            justify-content: center; /* 가로 중앙 정렬 */
-            width: 100%; /* 부모 컨테이너의 전체 너비 사용 */
-        }
-
-        .menu-overlay img {
-            width: 320px;
-            height: 130px;
-            padding: 10px;
-            background-color: white;
-            border-radius: 8px;
-            margin-top: 60px;
-        }
-        .menu-overlay-content h2 {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 44px;
-            color: white;
-        }
-        .menu-overlay-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .menu-overlay-content ul li {
-            margin-bottom: 14px;
-            font-size: 18px;
-        }
-
-        .menu-overlay-content ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-
-        .menu-overlay-content ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 7px;
-            border-radius: 5px;
         }
     </style>
 </head>
@@ -392,9 +288,9 @@ $conn->close();
         <div id="questionList">
             <?php foreach ($questions as $question): ?>
                 <div class="question-item">
-                    <h3><?php echo htmlspecialchars($question['username']); ?></h3>
-                    <p><?php echo nl2br(htmlspecialchars($question['question'])); ?></p>
-                    <p>질문 등록 시간: <?php echo date('Y-m-d H:i', strtotime($question['question_created_at'])); ?></p>
+                    <h3><?php echo htmlspecialchars($question['username']); ?></h3><br>
+                    <p><?php echo nl2br(htmlspecialchars($question['question'])); ?></p><br>
+                    <p>질문 등록 시간: <?php echo date('Y-m-d H:i', strtotime($question['question_created_at'])); ?></p><br><br>
                     <?php if (isset($_SESSION['adminid'])): ?>
                         <!-- 관리자용 답변 입력란 -->
                         <form method="post" action="reply.php">
@@ -406,9 +302,9 @@ $conn->close();
                     <?php if (!empty($question['reply'])): ?>
                         <!-- 관리자와 사용자에게 표시되는 답변 -->
                         <div class="admin-reply">
-                            <strong>관리자 답변:</strong>
-                            <p><?php echo nl2br(htmlspecialchars($question['reply'])); ?></p>
-                            <p><strong>답변자:</strong> <?php echo htmlspecialchars($question['adminid']); ?></p>
+                            <strong>관리자 답변:</strong><br><br>
+                            <p><?php echo nl2br(htmlspecialchars($question['reply'])); ?></p><br>
+                            <p><strong>답변자:</strong> <?php echo htmlspecialchars($question['adminid']); ?></p><br>
                             <p>답변 등록 시간: <?php echo date('Y-m-d H:i', strtotime($question['reply_created_at'])); ?></p>
                         </div>
                     <?php endif; ?>

@@ -7,19 +7,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-// 데이터베이스 연결 설정
-$servername = "localhost";
-$username = "root";
-$password = "skso1951";
-$dbname = "dbwork";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$conn->set_charset("utf8");
+require_once 'db.php';
 
 // 세션에서 사용자 ID 가져오기
 $memberid = $_SESSION['memberid'];
@@ -47,9 +35,9 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
     <title>내 이력서 목록</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="main.css">
     <style>
         .resume-list {
             max-width: 800px;
@@ -257,7 +245,7 @@ $conn->close();
                 <?php endif; ?>
             </div>
             <div>
-                <h2>마이 페이지</h2>
+                <h2 style="color: red;">마이 페이지</h2>
                     <ul>
                         <li><a href="mywrite.php">내가 작성한 게시글</a></li>
                         <li><a href="myreply.php">내가 작성한 댓글</a></li>

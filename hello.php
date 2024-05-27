@@ -16,6 +16,9 @@ session_start();
             margin: 0 auto;
             overflow: hidden;
         }
+        .menuli {
+            color: red;
+        }
         .main {
             padding: 20px;
             background: #fff;

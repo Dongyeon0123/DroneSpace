@@ -5,24 +5,7 @@ error_reporting(E_ALL);
 ini_set("log_errors", 1);
 ini_set("error_log", "php-error.log");
 
-// 데이터베이스 연결 설정
-$servername = "localhost";
-$username = "root";
-$password = "skso1951";
-$dbname = "dbwork";
-
-// MySQL 연결 생성
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// 연결 확인
-if ($conn->connect_error) {
-    error_log("Connection failed: " . $conn->connect_error);
-    echo "<script>alert('데이터베이스 연결에 실패했습니다.'); window.history.back();</script>";
-    exit;
-}
-
-// 연결 시 UTF-8 설정
-$conn->set_charset("utf8");
+require_once 'db.php';
 
 // 폼 데이터 받기
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
