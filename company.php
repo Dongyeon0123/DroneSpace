@@ -14,6 +14,7 @@ session_start();
             width: 80%;
             margin: auto;
             overflow: hidden;
+            padding-bottom: 10px;
         }
         .showcase {
             background: #333 url('drone.jpg') no-repeat 0 -400px;

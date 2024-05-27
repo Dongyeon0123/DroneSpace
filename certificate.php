@@ -204,67 +204,67 @@
 
     <script>
         document.getElementById('regionForm').addEventListener('change', function() {
-    const selectedRegions = Array.from(document.querySelectorAll('input[name="region"]:checked')).map(checkbox => checkbox.value);
-    const selectedCertificates = Array.from(document.querySelectorAll('input[name="certificate"]:checked')).map(checkbox => checkbox.value);
-    const posts = document.querySelectorAll('.post');
+            const selectedRegions = Array.from(document.querySelectorAll('input[name="region"]:checked')).map(checkbox => checkbox.value);
+            const selectedCertificates = Array.from(document.querySelectorAll('input[name="certificate"]:checked')).map(checkbox => checkbox.value);
+            const posts = document.querySelectorAll('.post');
 
-    posts.forEach(post => {
-        const postRegions = post.dataset.region.split(',');
-        const postCertificates = post.dataset.certificate.split(',');
+            posts.forEach(post => {
+                const postRegions = post.dataset.region.split(',');
+                const postCertificates = post.dataset.certificate.split(',');
 
-        const regionMatch = selectedRegions.length === 0 || selectedRegions.some(region => postRegions.includes(region));
-        const certificateMatch = selectedCertificates.length === 0 || selectedCertificates.some(certificate => postCertificates.includes(certificate));
+                const regionMatch = selectedRegions.length === 0 || selectedRegions.some(region => postRegions.includes(region));
+                const certificateMatch = selectedCertificates.length === 0 || selectedCertificates.some(certificate => postCertificates.includes(certificate));
 
-        if (regionMatch && certificateMatch) {
-            post.style.display = 'block';
-        } else {
-            post.style.display = 'none';
-        }
-    });
-});
+                if (regionMatch && certificateMatch) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
 
-document.getElementById('postForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const selectedRegions = Array.from(document.querySelectorAll('input[name="postRegion"]:checked')).map(checkbox => checkbox.value);
-    if (selectedRegions.length === 0) {
-        alert('지역을 선택해주세요.'); // 선택된 지역이 없으면 알림 표시
-        return; // 폼 제출 중지
-    }
+        document.getElementById('postForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const selectedRegions = Array.from(document.querySelectorAll('input[name="postRegion"]:checked')).map(checkbox => checkbox.value);
+            if (selectedRegions.length === 0) {
+                alert('지역을 선택해주세요.'); // 선택된 지역이 없으면 알림 표시
+                return; // 폼 제출 중지
+            }
 
-    const postTitle = document.getElementById('postTitle').value;
-    const postContent = document.getElementById('postContent').value;
-    const postRegions = selectedRegions;
-    const postCertificates = Array.from(document.querySelectorAll('input[name="postCertificate"]:checked')).map(checkbox => checkbox.value);
+            const postTitle = document.getElementById('postTitle').value;
+            const postContent = document.getElementById('postContent').value;
+            const postRegions = selectedRegions;
+            const postCertificates = Array.from(document.querySelectorAll('input[name="postCertificate"]:checked')).map(checkbox => checkbox.value);
 
-    const postDiv = document.createElement('div');
-    postDiv.className = 'post';
-    postDiv.dataset.region = postRegions.join(',');
-    postDiv.dataset.certificate = postCertificates.join(',');
-    postDiv.innerHTML = `<h3>${postTitle}</h3><p>${postContent}</p>`;
+            const postDiv = document.createElement('div');
+            postDiv.className = 'post';
+            postDiv.dataset.region = postRegions.join(',');
+            postDiv.dataset.certificate = postCertificates.join(',');
+            postDiv.innerHTML = `<h3>${postTitle}</h3><p>${postContent}</p>`;
 
-    document.getElementById('posts').appendChild(postDiv);
-    postDiv.style.display = 'block'; // Ensure new post is displayed
+            document.getElementById('posts').appendChild(postDiv);
+            postDiv.style.display = 'block'; // Ensure new post is displayed
 
-    document.getElementById('postForm').reset();
+            document.getElementById('postForm').reset();
 
-    const eventChange = new Event('change');
-    document.getElementById('regionForm').dispatchEvent(eventChange);
-});
+            const eventChange = new Event('change');
+            document.getElementById('regionForm').dispatchEvent(eventChange);
+        });
 
-document.getElementById('resetButton').addEventListener('click', function() {
-    const posts = document.querySelectorAll('.post');
-    posts.forEach(post => {
-        post.style.display = 'block';
-    });
-});
+        document.getElementById('resetButton').addEventListener('click', function() {
+            const posts = document.querySelectorAll('.post');
+            posts.forEach(post => {
+                post.style.display = 'block';
+            });
+        });
 
-// Display all posts initially
-document.addEventListener('DOMContentLoaded', function() {
-    const posts = document.querySelectorAll('.post');
-    posts.forEach(post => {
-        post.style.display = 'block';
-    });
-});
+        // Display all posts initially
+        document.addEventListener('DOMContentLoaded', function() {
+            const posts = document.querySelectorAll('.post');
+            posts.forEach(post => {
+                post.style.display = 'block';
+            });
+        });
 
     </script>
 </body>

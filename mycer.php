@@ -47,35 +47,10 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
     <title>내 이력서 목록</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fff;
-            padding: 10px 35px;
-            border-bottom: 2px solid #000;
-        }
-        .header img {
-            width: 200px;
-            height: 90px;
-            margin: 0;
-            margin-left: 100px;
-        }
-        .header a {
-            text-decoration: none;
-        }
-        h1 {
-            text-align: center;
-        }
         .resume-list {
             max-width: 800px;
             margin: auto;
@@ -103,105 +78,6 @@ $conn->close();
             height: 150px;
             border-radius: 8px;
             margin-top: 20px;
-        }
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 35px;
-            height: 30px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-        .hamburger div {
-            width: 100%;
-            height: 3px;
-            background-color: #333;
-            transition: all 0.3s ease-in-out;
-        }
-        .hamburger:hover div:nth-child(1) {
-            width: 50%;
-        }
-        .hamburger:hover div:nth-child(3) {
-            width: 50%;
-        }
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(1, 161, 91, 0.9), #3b3b3b);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 1s ease-in-out;
-            z-index: 1002;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            cursor: pointer;
-            font-size: 24px;
-            color: white;
-            z-index: 101;  /* 메뉴 위에 보이도록 z-index 설정 */
-        }
-
-        .menu-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .menu-overlay-content {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            padding: 16px 32px;
-            margin-top: 50px;
-            margin-left: 220px;
-            text-align: center;
-        }
-        .menu-overlay .image-container {
-            display: flex;
-            justify-content: center; /* 가로 중앙 정렬 */
-            width: 100%; /* 부모 컨테이너의 전체 너비 사용 */
-        }
-
-        .menu-overlay img {
-            width: 320px;
-            height: 130px;
-            padding: 10px;
-            background-color: white;
-            border-radius: 8px;
-            margin-top: 60px;
-        }
-        .menu-overlay-content h2 {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 44px;
-            color: white;
-        }
-        .menu-overlay-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .menu-overlay-content ul li {
-            margin-bottom: 14px;
-            font-size: 18px;
-        }
-
-        .menu-overlay-content ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-
-        .menu-overlay-content ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 7px;
-            border-radius: 5px;
         }
         h1 {
             color: #333;

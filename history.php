@@ -8,106 +8,14 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
     <title>연혁</title>
     <style>
         @charset "utf-8";
-        body {
-            font-family: "NEXON Gothic", Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
         .container {
             width: 80%;
             margin: 0 auto;
             overflow: hidden;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fff;
-            padding: 7px 35px;
-            border-bottom: 2px solid #000;
-        }
-        .header img {
-            width: 200px;
-            height: 90px;
-            margin-left: 100px;
-            margin-top: 2.8px;
-        }
-        .header a {
-            text-decoration: none;
-        }
-        .menuli {
-            color: red;
-        }
-        .menu {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        .menu li {
-            position: relative;
-            padding: 10px;
-            cursor: pointer;
-        }
-        .menu li ul {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 175px;  /* 너비 조정이 필요하면 수정 */
-            background-color: rgb(227, 227, 227);
-            list-style: none;
-            padding: 0;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            border-top: 5px solid rgb(51, 179, 57);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            visibility: hidden;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 0.5s ease-in-out; /* 효과 지속시간과 타이밍 함수 조정 */
-            z-index: 1000;
-        }
-        .menu li:hover ul {
-            visibility: visible;
-            opacity: 1;
-        }
-        .menu li:not(:last-child)::after {
-            content: "|";
-            color: rgb(156, 154, 154);
-            margin-left: 30px;
-            margin-right: 20px;
-        }
-        .menu li ul li:not(:last-child)::after {
-            content: none;
-        }
-        .menu li ul li {
-            width: 145px;
-            padding: 15px;
-            text-align: center;
-        }
-        .menu li ul li:hover {
-            background-color: rgb(51, 179, 57);
-            color: white;
-        }
-        .menu li ul li:last-child {
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
-        .menu li ul li a {
-            color: black;
-            text-decoration: none;
-        }
-        .menu li ul li a:hover {
-            color: white;
-        }
-        .menu a li {
-            color: black;
         }
         .search-container {
             text-align: center;
