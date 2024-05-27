@@ -1,12 +1,15 @@
 <?php
 session_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     echo "<script>alert('로그인이 필요합니다.'); window.location.href='login.html';</script>";
     exit;
 }
 
-// 데이터베이스 연결 설정
 $servername = "localhost";
 $username = "root";
 $password = "skso1951";
@@ -16,17 +19,16 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 $conn->set_charset("utf8");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $resume_id = $_POST['id'];
+    $resume_id = $_POST['resume_id'];
     $name = $_POST['name'];
     $birthdate = $_POST['birthdate'];
     $phone = $_POST['phone'];
     $address = $_POST['address'];
     $education_level = $_POST['education'];
-    $university_name = isset($_POST['university_name']) ? $_POST['university_name'] : null;
+    $university_name = $_POST['university_name'] ?? null;
     $certifications = implode(", ", $_POST['certifications']);
     $experience = json_encode(array_map(function ($company, $period, $duties) {
         return ['company' => $company, 'period' => $period, 'duties' => $duties];
@@ -45,27 +47,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    $params = [$name, $birthdate, $phone, $address, $education_level, $university_name, $certifications, $experience];
+    $types = "ssssssss";
+    if ($resume_photo) {
+        $params[] = $resume_photo;
+        $types .= "s";
+    }
+    $params[] = $resume_id;
+    $params[] = $_SESSION['memberid'];
+    $types .= "is";
+
     $sql = "UPDATE resumes SET name = ?, birthdate = ?, phone = ?, address = ?, education_level = ?, university_name = ?, certifications = ?, experience = ?";
     if ($resume_photo) {
         $sql .= ", resume_photo = ?";
     }
-    $sql .= " WHERE id = ? AND memberid = ?";
+    $sql .= " WHERE resume_id = ? AND memberid = ?";
 
     $stmt = $conn->prepare($sql);
-    if ($resume_photo) {
-        $stmt->bind_param("ssssssssssis", $name, $birthdate, $phone, $address, $education_level, $university_name, $certifications, $experience, $resume_photo, $resume_id, $_SESSION['memberid']);
-    } else {
-        $stmt->bind_param("sssssssssi", $name, $birthdate, $phone, $address, $education_level, $university_name, $certifications, $experience, $resume_id, $_SESSION['memberid']);
-    }
+    $stmt->bind_param($types, ...$params);
 
     if ($stmt->execute()) {
         echo "<script>alert('이력서가 성공적으로 수정되었습니다.'); window.location.href='mycer.php';</script>";
     } else {
         echo "<script>alert('이력서 수정에 실패했습니다.'); window.history.back();</script>";
     }
-
     $stmt->close();
 }
-
 $conn->close();
 ?>

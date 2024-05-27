@@ -27,8 +27,9 @@ if (!isset($_GET['id'])) {
 $resume_id = $_GET['id'];
 
 // 이력서 데이터 조회
-$stmt = $conn->prepare("SELECT id, name, birthdate, phone, address, education_level, university_name, certifications, experience, resume_photo FROM resumes WHERE id = ? AND memberid = ?");
+$stmt = $conn->prepare("SELECT resume_id, name, birthdate, phone, address, education_level, university_name, certifications, experience, resume_photo FROM resumes WHERE resume_id = ? AND memberid = ?");
 $stmt->bind_param("is", $resume_id, $_SESSION['memberid']);
+
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -141,7 +142,7 @@ $conn->close();
 <body>
     <h1>이력서 수정</h1>
     <form action="update_resume.php" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?php echo $resume['id']; ?>">
+        <input type="hidden" name="resume_id" value="<?php echo $resume['resume_id']; ?>">
         <div>
             <label for="name">이름:</label>
             <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($resume['name']); ?>" required>
@@ -174,12 +175,20 @@ $conn->close();
         </div>
         <div>
             <label for="certifications">자격증 보유 현황:</label>
-            <input type="checkbox" id="cert1" name="certifications[]" value="1종 드론 국가자격증" <?php if (strpos($resume['certifications'], '1종 드론 국가자격증') !== false) echo 'checked'; ?>>
             <label for="cert1">1종 드론 국가자격증</label>
-            <input type="checkbox" id="cert2" name="certifications[]" value="2종 드론 국가자격증" <?php if (strpos($resume['certifications'], '2종 드론 국가자격증') !== false) echo 'checked'; ?>>
+            <input type="checkbox" id="cert1" name="certifications[]" value="1종 드론 국가자격증" <?php if (strpos($resume['certifications'], '1종 드론 국가자격증') !== false) echo 'checked'; ?>>
             <label for="cert2">2종 드론 국가자격증</label>
-            <input type="checkbox" id="cert3" name="certifications[]" value="3종 드론 국가자격증" <?php if (strpos($resume['certifications'], '3종 드론 국가자격증') !== false) echo 'checked'; ?>>
+            <input type="checkbox" id="cert2" name="certifications[]" value="2종 드론 국가자격증" <?php if (strpos($resume['certifications'], '2종 드론 국가자격증') !== false) echo 'checked'; ?>>
             <label for="cert3">3종 드론 국가자격증</label>
+            <input type="checkbox" id="cert3" name="certifications[]" value="3종 드론 국가자격증" <?php if (strpos($resume['certifications'], '3종 드론 국가자격증') !== false) echo 'checked'; ?>>
+            <label for="cert4">4종 드론 국가자격증</label>
+            <input type="checkbox" id="cert4" name="certifications[]" value="3종 드론 국가자격증" <?php if (strpos($resume['certifications'], '3종 드론 국가자격증') !== false) echo 'checked'; ?>>
+            <label for="cert5">초경량 비행장치 조종 자격증</label>
+            <input type="checkbox" id="cert5" name="certifications[]" value="초경량 비행장치 조종 자격증" <?php if (strpos($resume['certifications'], '초경량 비행장치 조종 자격증') !== false) echo 'checked'; ?>>
+            <label for="cert6">드론 교관 자격증</label>
+            <input type="checkbox" id="cert6" name="certifications[]" value="드론교관자격증" <?php if (strpos($resume['certifications'], '드론교관자격증') !== false) echo 'checked'; ?>>
+            <label for="cert7">드론 실기평가 조종자 자격증</label>
+            <input type="checkbox" id="cert7" name="certifications[]" value="드론 실기평가 조종자 자격증" <?php if (strpos($resume['certifications'], '드론 실기평가 조종자 자격증') !== false) echo 'checked'; ?>>
         </div>
         <div id="experience-container">
             <label for="experience">경력:</label>

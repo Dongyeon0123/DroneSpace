@@ -52,10 +52,26 @@ $conn->close();
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
-            padding: 20px;
+            background-color: #f4f4f4;
             color: #333;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 35px;
+            border-bottom: 2px solid #000;
+        }
+        .header img {
+            width: 200px;
+            height: 90px;
+            margin: 0;
+            margin-left: 100px;
+        }
+        .header a {
+            text-decoration: none;
         }
         h1 {
             text-align: center;
@@ -103,9 +119,196 @@ $conn->close();
         .delete-button:hover {
             background-color: #D43F3F;
         }
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 35px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .hamburger div {
+            width: 100%;
+            height: 3px;
+            background-color: #333;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger:hover div:nth-child(1) {
+            width: 50%;
+        }
+        .hamburger:hover div:nth-child(3) {
+            width: 50%;
+        }
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(1, 161, 91, 0.9), #3b3b3b);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out;
+            z-index: 1002;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            z-index: 101;  /* 메뉴 위에 보이도록 z-index 설정 */
+        }
+
+        .menu-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-overlay-content {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            padding: 16px 32px;
+            margin-top: 50px;
+            margin-left: 220px;
+            text-align: center;
+        }
+        .menu-overlay .image-container {
+            display: flex;
+            justify-content: center; /* 가로 중앙 정렬 */
+            width: 100%; /* 부모 컨테이너의 전체 너비 사용 */
+        }
+
+        .menu-overlay img {
+            width: 320px;
+            height: 130px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            margin-top: 60px;
+        }
+        .menu-overlay-content h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 44px;
+            color: white;
+        }
+        .menu-overlay-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-overlay-content ul li {
+            margin-bottom: 14px;
+            font-size: 18px;
+        }
+
+        .menu-overlay-content ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+
+        .menu-overlay-content ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 7px;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        /* 폼 스타일링 */
+        form {
+            background-color: white;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* padding을 포함한 너비를 100%로 계산 */
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical; /* 사용자가 세로 크기 조절 가능 */
+        }
+
+        button {
+            background-color: #5C67F2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #4a54e1; /* 버튼 호버 효과 */
+        }
+
+        /* 경력 추가 버튼 스타일 */
+        #experience-container button {
+            margin-top: 10px;
+            background-color: #4CAF50;
+        }
+
+        #experience-container div {
+            background-color: #e7e7e7;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+        }
+
+        /* 삭제 버튼 스타일 */
+        .delete-button {
+            background-color: #FF4B4B;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .delete-button:hover {
+            background-color: #D43F3F; /* 삭제 버튼 호버 효과 */
+        }
     </style>
 </head>
 <body>
+    <header class="header">
+        <a href="main.php"><img src="logo.png"></a>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
     <h1>내 이력서 목록</h1>
     <div class="resume-list">
         <?php if (empty($resumes)): ?>
@@ -133,11 +336,92 @@ $conn->close();
                 <?php if ($resume['resume_photo']): ?>
                 <img src="<?= htmlspecialchars($resume['resume_photo']); ?>" alt="이력서 사진">
                 <?php endif; ?>
-                <button onclick="location.href='edit_resume.php?id=<?= $resume['id']; ?>'">수정</button>
+                <button onclick="location.href='edit_resume.php?id=<?= $resume['resume_id']; ?>'">수정</button>
                 <button class="delete-button" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='delete_resume.php?id=<?= $resume['id']; ?>'">삭제</button>
             </div>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="image-container">
+            <a href="main.php"><img src="logo.png"></a>
+        </div>
+        <div class="menu-overlay-content">
+            <span class="close-btn" onclick="closeMenu()">X</span>
+            <div>
+                <h2>기업 소개</h2>
+                    <ul>
+                        <li><a href="hello.php">인사말</a></li>
+                        <li><a href="history.php">DroneSpace 연혁</a></li>
+                        <li><a href="vision.php">아카데미 비전</a></li>
+                        <li><a href="facility.php">시설 현황</a></li>
+                        <li><a href="map.php">오시는 길</a></li>
+                    </ul>
+            </div>
+            <div>
+                <h2>국가 자격증</h2>
+                    <ul>
+                        <li><a href="information.php">국가 자격증 안내</a></li>
+                        <li><a href="money.php">교육비 지원 안내</a></li>
+                        <li><a href="company.php">기관/단체 교육 안내</a></li>
+                        <li><a href="type1.php">1종 조종자 과정</a></li>
+                        <li><a href="type2.php">2종 조종자 과정</a></li>
+                        <li><a href="type3.php">3종 조종자 과정</a></li>
+                        <li><a href="education.php">드론 운용자 교육</a></li>
+                        <li><a href="instructor.php">지도 조종자 과정</a></li>
+                        <li><a href="practical.php">실기 평가자 과정</a></li>
+                    </ul>
+            </div>
+            <div>
+                <h2>구인 & 구직</h2>
+                    <ul>
+                        <li><a href="area.php">지역별</a></li>
+                        <li><a href="certificate.php">자격증별</a></li>
+                    </ul>
+            </div>
+            <div>
+                <h2>커뮤니티</h2>
+                    <ul>
+                        <li><a href="everything.php">전체글</a></li>
+                        <li><a href="hot.php">HOT글</a></li>
+                        <li><a href="ask.php">1대1 질문 게시판</a></li>
+                    </ul>
+            </div>
+            <div style="margin-top: 24px;">
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
+                    <a href="logout.php" style="color: white; font-size: 24px;">로그아웃</a>
+                <?php else: ?>
+                    <a href="login.html" style="color: white; font-size: 24px;">로그인 / 회원가입</a>
+                <?php endif; ?>
+            </div>
+            <div>
+                <h2>마이 페이지</h2>
+                    <ul>
+                        <li><a href="mywrite.php">내가 작성한 게시글</a></li>
+                        <li><a href="myreply.php">내가 작성한 댓글</a></li>
+                        <li><a href="application.php">구인&구직 신청 현황</a></li>
+                        <li><a href="mycer.php">내 이력서</a></li>
+                    </ul>
+            </div>
+    </div>
+    <script>
+        function toggleMenu() {
+            var menuOverlay = document.getElementById('menuOverlay');
+            menuOverlay.classList.toggle('show');
+        }
+        
+        // 하위 메뉴 링크 클릭 시 메뉴 숨기기
+        document.querySelectorAll('.menu-overlay-content ul li ul li a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                var menuOverlay = document.getElementById('menuOverlay');
+                menuOverlay.classList.remove('show');
+            });
+        });
+
+        function closeMenu() {
+            var menuOverlay = document.getElementById('menuOverlay');
+            menuOverlay.classList.remove('show');  // 'show' 클래스를 제거하여 팝업 숨김
+        }
+    </script>
 </body>
 </html>
