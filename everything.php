@@ -133,7 +133,7 @@ $conn->close();
                 </ul>
             </li>
             <li>
-                커뮤니티
+                <span style="color: red;">커뮤니티</span>
                 <ul>
                     <a href="everything.php"><li>전체글</li></a>
                     <a href="hot.php"><li>HOT글</li></a>
@@ -174,7 +174,7 @@ $conn->close();
                     <p>작성자: <?= htmlspecialchars($post['name']); ?></p>
                     <p>게시일: <?= htmlspecialchars($post['postdate']); ?></p>
                     <p><i id="like-icon-<?= $post['postnum']; ?>" class="far fa-heart like-icon <?= ($post['like_count'] > 0 ? 'liked' : '') ?>" onclick="event.stopPropagation(); toggleLike(<?= $post['postnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $post['postnum']; ?>"><?= $post['like_count']; ?></span></p>
-                    <?php if ($_SESSION['memberid'] == $post['memberid']): ?>
+                    <?php if ($_SESSION['memberid'] == $post['memberid']): ?><br><br>
                         <button onclick="event.stopPropagation(); editPost(<?= $post['postnum']; ?>)">수정</button>
                         <button class="delete-button" onclick="event.stopPropagation(); deletePost(<?= $post['postnum']; ?>)">삭제</button>
                     <?php endif; ?>
@@ -220,7 +220,7 @@ $conn->close();
                     </ul>
             </div>
             <div>
-                <h2>커뮤니티</h2>
+                <h2><span class="menuli">커뮤니티</span></h2>
                     <ul>
                         <li><a href="everything.php">전체글</a></li>
                         <li><a href="hot.php">HOT글</a></li>

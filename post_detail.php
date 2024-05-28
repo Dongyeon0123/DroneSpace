@@ -74,7 +74,7 @@ $conn->close();
             text-align: center;
             color: #4A54E1;
         }
-        .post {
+        .post, .comment {
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -82,20 +82,7 @@ $conn->close();
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
-        .post p {
-            margin: 5px 0;
-        }
-        .comments {
-            margin-top: 20px;
-        }
-        .comment {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: #f9f9f9;
-            margin-bottom: 10px;
-        }
-        .comment p {
+        .post p, .comment p {
             margin: 5px 0;
         }
         button {
@@ -161,7 +148,7 @@ $conn->close();
                 </ul>
             </li>
             <li>
-                커뮤니티
+                <span class="menuli">커뮤니티</span>
                 <ul>
                     <a href="everything.php"><li>전체글</li></a>
                     <a href="hot.php"><li>HOT글</li></a>
@@ -198,9 +185,8 @@ $conn->close();
             <p>작성자: <?= htmlspecialchars($name); ?></p>
             <p>게시일: <?= htmlspecialchars($postdate); ?></p>
             <p><i id="like-icon-<?= $postnum; ?>" class="far fa-heart like-icon <?= ($user_liked > 0 ? 'liked' : '') ?>" onclick="toggleLike(<?= $postnum; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $postnum; ?>"><?= $like_count; ?></span></p>
-            <?php if ($_SESSION['memberid'] == $memberid): ?>
+            <?php if ($_SESSION['memberid'] == $memberid): ?><br><br>
                 <button onclick="editPost(<?= $postnum; ?>)">수정</button>
-                <button class="delete-button" onclick="deletePost(<?= $postnum; ?>)">삭제</button>
             <?php endif; ?>
         </div>
 
@@ -210,7 +196,7 @@ $conn->close();
                 <div class="comment">
                     <p><?= nl2br(htmlspecialchars($comment['commentcontent'])); ?></p><br>
                     <p>작성자: <?= htmlspecialchars($comment['name']); ?></p>
-                    <p>작성일: <?= date("Y-m-d H:i", strtotime($comment['commentdate'])); ?></p> <!-- 작성 날짜 표시 -->
+                    <p>작성일: <?= date("Y-m-d H:i", strtotime($comment['commentdate'])); ?></p>
                     <p><i id="comment-like-icon-<?= $comment['commentnum']; ?>" class="far fa-heart like-icon <?= ($comment['user_liked'] > 0 ? 'liked' : '') ?>" onclick="toggleCommentLike(<?= $comment['commentnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="comment-like-count-<?= $comment['commentnum']; ?>"><?= $comment['like_count']; ?></span></p>
                     <?php if ($_SESSION['memberid'] == $comment['memberid']): ?>
                         <button class="delete-button" onclick="deleteComment(<?= $comment['commentnum']; ?>)">삭제</button>
@@ -218,10 +204,10 @@ $conn->close();
                 </div>
             <?php endforeach; ?>
         </div>
-        <form id="comment-form" action="add_comment.php" method="post">
-            <input type="hidden" name="postnum" value="<?= $postnum ?>">
-            <textarea id="comment-content" name="commentcontent" required></textarea>
-            <button type="submit">댓글 작성</button> <!-- type="submit" 추가 -->
+        <form method="POST" action="add_comment.php">
+            <input type="hidden" name="postnum" value="<?= $postnum; ?>">
+            <textarea name="commentcontent" required placeholder="댓글을 입력하세요."></textarea>
+            <button type="submit">댓글 작성</button>
         </form>
     </div>
     <div class="menu-overlay" id="menuOverlay">
@@ -262,7 +248,7 @@ $conn->close();
                     </ul>
             </div>
             <div>
-                <h2>커뮤니티</h2>
+                <h2><span class="menuli">커뮤니티</span></h2>
                     <ul>
                         <li><a href="everything.php">전체글</a></li>
                         <li><a href="hot.php">HOT글</a></li>
@@ -316,18 +302,18 @@ $conn->close();
                 $.ajax({
                     url: 'delete_post.php',
                     type: 'POST',
-                    data: {postnum: postnum},
-                    success: function(data) {
-                        var response = JSON.parse(data);
+                    data: { postnum: postnum },
+                    dataType: 'json',
+                    success: function(response) {
                         if (response.success) {
-                            alert('게시글이 성공적으로 삭제되었습니다.');
-                            window.location.href = 'everything.php'; // 성공 시 페이지 이동
+                            alert('게시글이 삭제되었습니다.');
+                            window.location.href = 'everything.php';  // 메인 페이지로 이동
                         } else {
                             alert('게시글 삭제에 실패했습니다: ' + response.error);
                         }
                     },
                     error: function() {
-                        alert('게시글 삭제 요청에 실패했습니다.');
+                        alert('게시글 삭제 요청을 처리할 수 없습니다.');
                     }
                 });
             }
@@ -364,17 +350,17 @@ $conn->close();
                 url: 'add_comment.php',
                 type: 'POST',
                 data: formData,
-                success: function(data) {
-                    var response = JSON.parse(data);
+                dataType: 'json', // 명시적으로 JSON 응답을 예상한다고 설정
+                success: function(response) {
                     if (response.success) {
                         alert('댓글이 성공적으로 작성되었습니다.');
                         location.reload();  // 페이지 새로 고침
                     } else {
-                        alert('댓글 작성에 실패했습니다.');
+                        alert('댓글 작성에 실패했습니다: ' + response.error);
                     }
                 },
-                error: function() {
-                    alert('댓글 작성에 실패했습니다.');
+                error: function(xhr) {
+                    alert('댓글 작성 요청에 실패했습니다. 서버 오류가 발생했을 수 있습니다.');
                 }
             });
         });
@@ -390,7 +376,7 @@ $conn->close();
                             alert('댓글이 삭제되었습니다.');
                             location.reload();  // 페이지 새로 고침
                         } else {
-                            alert(response.error);
+                            alert('댓글 삭제에 실패했습니다: ' + response.error);
                         }
                     },
                     error: function() {

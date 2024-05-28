@@ -366,6 +366,7 @@ session_start();
                         <li><a href="mycer.php">내 이력서</a></li>
                     </ul>
             </div>
+        </div>
     </div>
 
     <script>
