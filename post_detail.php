@@ -233,7 +233,7 @@ $conn->close();
                     <p>작성일: <?= date("Y-m-d H:i", strtotime($comment['commentdate'])); ?></p>
                     <p><i id="comment-like-icon-<?= $comment['commentnum']; ?>" class="fa-heart like-icon <?= ($comment['user_liked'] > 0 ? 'fas liked' : 'far') ?>" onclick="toggleCommentLike(<?= $comment['commentnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="comment-like-count-<?= $comment['commentnum']; ?>"><?= $comment['like_count']; ?></span></p>
                     <?php if ($_SESSION['memberid'] == $comment['memberid']): ?><br>
-                        <button class="delete-button" onclick="deleteComment(<?= $comment['commentnum']; ?>)">삭제</button>
+                        <button class="delete-button" onclick="deleteComment(<?= $comment['commentnum']; ?>)">댓글 삭제</button>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
