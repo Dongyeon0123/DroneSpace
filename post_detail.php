@@ -218,7 +218,7 @@ $conn->close();
             <p><?= nl2br(htmlspecialchars($postcontent)); ?></p><br><br>
             <p>작성자: <?= htmlspecialchars($name); ?></p>
             <p>게시일: <?= htmlspecialchars($postdate); ?></p><br>
-            <p><i id="like-icon-<?= $postnum; ?>" class="fa-heart like-icon <?= ($user_liked > 0 ? 'far liked' : 'far') ?>" onclick="toggleLike(<?= $postnum; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $postnum; ?>"><?= $like_count; ?></span></p>
+            <p><i id="like-icon-<?= $postnum; ?>" class="fa-heart like-icon <?= ($user_liked > 0 ? 'fas liked' : 'far') ?>" onclick="toggleLike(<?= $postnum; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $postnum; ?>"><?= $like_count; ?></span></p>
             <?php if ($_SESSION['memberid'] == $memberid): ?><br><br>
                 <button onclick="editPost(<?= $postnum; ?>)">수정</button>
             <?php endif; ?>
@@ -231,7 +231,7 @@ $conn->close();
                     <p style="font-weight: bold;"><?= htmlspecialchars($comment['memberid']); ?></p><br>
                     <p><?= nl2br(htmlspecialchars($comment['commentcontent'])); ?></p><br>
                     <p>작성일: <?= date("Y-m-d H:i", strtotime($comment['commentdate'])); ?></p>
-                    <p><i id="comment-like-icon-<?= $comment['commentnum']; ?>" class="far fa-heart like-icon <?= ($comment['user_liked'] > 0 ? 'liked' : '') ?>" onclick="toggleCommentLike(<?= $comment['commentnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="comment-like-count-<?= $comment['commentnum']; ?>"><?= $comment['like_count']; ?></span></p>
+                    <p><i id="comment-like-icon-<?= $comment['commentnum']; ?>" class="fa-heart like-icon <?= ($comment['user_liked'] > 0 ? 'fas liked' : 'far') ?>" onclick="toggleCommentLike(<?= $comment['commentnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="comment-like-count-<?= $comment['commentnum']; ?>"><?= $comment['like_count']; ?></span></p>
                     <?php if ($_SESSION['memberid'] == $comment['memberid']): ?><br>
                         <button class="delete-button" onclick="deleteComment(<?= $comment['commentnum']; ?>)">삭제</button>
                     <?php endif; ?>
