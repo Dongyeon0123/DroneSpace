@@ -104,6 +104,23 @@ $conn->close();
             height: 100px;
             resize: vertical; /* 사용자가 세로 크기 조절 가능 */
         }
+        
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .create-button {
+            background-color: #5C67F2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .create-button:hover {
+            background-color: #4a54e1;
+        }
 
         .edit-button {
             background-color: #5C67F2;
@@ -160,6 +177,9 @@ $conn->close();
         </div>
     </header>
     <h1>내 이력서 목록</h1>
+    <div class="button-container">
+        <button class="create-button" onclick="location.href='mycer.html'">이력서 작성</button>
+    </div>
     <div class="resume-list">
         <?php if (empty($resumes)): ?>
             <p>등록된 이력서가 없습니다.</p>
@@ -187,7 +207,7 @@ $conn->close();
                     <img src="<?= htmlspecialchars($resume['resume_photo']); ?>" alt="이력서 사진">
                 <?php endif; ?>
                 <button class="edit-button" onclick="location.href='edit_resume.php?id=<?= $resume['resume_id']; ?>'">수정</button>
-                <button class="delete-button" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='delete_resume.php?id=<?= $resume['id']; ?>'">삭제</button>
+                <button class="delete-button" onclick="deleteResume(<?= $resume['resume_id']; ?>)">삭제</button>
             </div>
             <?php endforeach; ?>
         <?php endif; ?>
@@ -214,9 +234,9 @@ $conn->close();
                         <li><a href="information.php">국가 자격증 안내</a></li>
                         <li><a href="money.php">교육비 지원 안내</a></li>
                         <li><a href="company.php">기관/단체 교육 안내</a></li>
-                        <li><a href="type1.php">1종 조종자 과정</a></li>
-                        <li><a href="type2.php">2종 조종자 과정</a></li>
-                        <li><a href="type3.php">3종 조종자 과정</a></li>
+                        <li><a href="type1.php">1종 조종자 과정</li></a>
+                        <li><a href="type2.php">2종 조종자 과정</li></a>
+                        <li><a href="type3.php">3종 조종자 과정</li></a>
                         <li><a href="education.php">드론 운용자 교육</a></li>
                         <li><a href="instructor.php">지도 조종자 과정</a></li>
                         <li><a href="practical.php">실기 평가자 과정</a></li>
@@ -271,6 +291,26 @@ $conn->close();
         function closeMenu() {
             var menuOverlay = document.getElementById('menuOverlay');
             menuOverlay.classList.remove('show');  // 'show' 클래스를 제거하여 팝업 숨김
+        }
+
+        function deleteResume(resume_id) {
+            if (confirm('정말 삭제하시겠습니까?')) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "delete_resume.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            alert('이력서가 성공적으로 삭제되었습니다.');
+                            location.reload();
+                        } else {
+                            alert('이력서 삭제에 실패했습니다: ' + response.message);
+                        }
+                    }
+                };
+                xhr.send("id=" + resume_id);
+            }
         }
     </script>
 </body>

@@ -1,23 +1,23 @@
 <?php
 session_start();
+require_once 'db.php';  // 데이터베이스 연결 포함
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    echo "<script>alert('로그인이 필요합니다.'); window.location.href='login.html';</script>";
+    echo json_encode(['success' => false, 'message' => '로그인이 필요합니다.']);
     exit;
 }
 
-require_once 'db.php';
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $resume_id = $_POST['id'];
+    $memberid = $_SESSION['memberid'];
 
-    $stmt = $conn->prepare("DELETE FROM resumes WHERE id = ? AND memberid = ?");
-    $stmt->bind_param("is", $resume_id, $_SESSION['memberid']);
+    $stmt = $conn->prepare("DELETE FROM resumes WHERE resume_id = ? AND memberid = ?");
+    $stmt->bind_param("is", $resume_id, $memberid);
 
     if ($stmt->execute()) {
-        echo "<script>alert('이력서가 성공적으로 삭제되었습니다.'); window.location.href='mycer.php';</script>";
+        echo json_encode(['success' => true]);
     } else {
-        echo "<script>alert('이력서 삭제에 실패했습니다.'); window.history.back();</script>";
+        echo json_encode(['success' => false, 'message' => '이력서 삭제에 실패했습니다.']);
     }
 
     $stmt->close();

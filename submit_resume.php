@@ -40,9 +40,9 @@ $stmt = $conn->prepare("INSERT INTO resumes (memberid, name, birthdate, phone, a
 $stmt->bind_param("ssssssssss", $memberid, $name, $birthdate, $phone, $address, $education_level, $university_name, $certifications, $experience_json, $resume_photo);
 
 if ($stmt->execute()) {
-    echo "<script>alert('이력서가 성공적으로 제출되었습니다.'); window.location.href='mycer.php';</script>";
+    echo "<script>alert('이력서가 성공적으로 작성되었습니다.'); window.location.href='mycer.php';</script>";
 } else {
-    echo "<script>alert('이력서 제출 중 오류가 발생했습니다.'); window.history.back();</script>";
+    echo "<script>alert('이력서 작성 중 오류가 발생했습니다.'); window.history.back();</script>";
 }
 
 $stmt->close();
