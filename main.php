@@ -191,7 +191,7 @@ session_start();
     </header>
 
     <div class="search-container">
-        <input type="text" id="searchInput" placeholder="채용정보를 검색해보세요.">
+        <input type="text" id="searchInput" placeholder="키워드를 검색해보세요.">
         <button id="searchButton" onclick="search()">검색</button>
         <ul id="searchResults">
             <!-- 검색 결과가 여기에 표시됩니다 -->
