@@ -9,7 +9,13 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
 
 // 게시글 목록 조회
 $posts = [];
-$stmt = $conn->prepare("SELECT p.postnum, p.memberid, p.posttitle, p.postcontent, p.postdate, m.name, (SELECT COUNT(*) FROM likes WHERE postnum = p.postnum) AS like_count FROM post p JOIN membertbl m ON p.memberid = m.memberid ORDER BY p.postnum DESC");
+$stmt = $conn->prepare("SELECT p.postnum, p.memberid, p.posttitle, p.postcontent, p.postdate, m.name, 
+                        (SELECT COUNT(*) FROM likes WHERE postnum = p.postnum) AS like_count,
+                        (SELECT COUNT(*) FROM likes WHERE postnum = p.postnum AND memberid = ?) AS user_liked 
+                        FROM post p 
+                        JOIN membertbl m ON p.memberid = m.memberid 
+                        ORDER BY p.postnum DESC");
+$stmt->bind_param("s", $_SESSION['memberid']);
 if ($stmt->execute()) {
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
@@ -171,7 +177,7 @@ $conn->close();
                     <p><?= nl2br(htmlspecialchars($post['postcontent'])); ?></p><br>
                     <p>작성자: <?= htmlspecialchars($post['name']); ?></p>
                     <p>게시일: <?= htmlspecialchars($post['postdate']); ?></p><br>
-                    <p><i id="like-icon-<?= $post['postnum']; ?>" class="fa-heart like-icon <?= $post['like_count'] ? 'fas liked' : 'far' ?>" onclick="event.stopPropagation(); toggleLike(<?= $post['postnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $post['postnum']; ?>"><?= $post['like_count']; ?></span></p>
+                    <p><i id="like-icon-<?= $post['postnum']; ?>" class="fa-heart like-icon <?= ($post['user_liked'] > 0 ? 'fas liked' : 'far') ?>" onclick="event.stopPropagation(); toggleLike(<?= $post['postnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $post['postnum']; ?>"><?= $post['like_count']; ?></span></p>
                     <?php if ($_SESSION['memberid'] == $post['memberid']): ?><br><br>
                         <button onclick="event.stopPropagation(); editPost(<?= $post['postnum']; ?>)">수정</button>
                         <button class="delete-button" onclick="event.stopPropagation(); deletePost(<?= $post['postnum']; ?>)">삭제</button>
@@ -190,9 +196,9 @@ $conn->close();
                 <h2>기업 소개</h2>
                     <ul>
                         <li><a href="hello.php">인사말</a></li>
-                        <li><a href="history.php">DroneSpace 연혁</a></li>
-                        <li><a href="vision.php">아카데미 비전</a></li>
-                        <li><a href="facility.php">시설 현황</a></li>
+                        <li><a href="history.php">DroneSpace 연혁</li></a>
+                        <li><a href="vision.php">아카데미 비전</li></a>
+                        <li><a href="facility.php">시설 현황</li></a>
                         <li><a href="map.php">오시는 길</a></li>
                     </ul>
             </div>
@@ -236,9 +242,9 @@ $conn->close();
                 <h2>마이 페이지</h2>
                     <ul>
                         <li><a href="mywrite.php">내가 작성한 게시글</a></li>
-                        <li><a href="myreply.php">내가 작성한 댓글</a></li>
-                        <li><a href="application.php">구인&구직 신청 현황</a></li>
-                        <li><a href="mycer.php">내 이력서</a></li>
+                        <li><a href="myreply.php">내가 작성한 댓글</li></a>
+                        <li><a href="application.php">구인&구직 신청 현황</li></a>
+                        <li><a href="mycer.php">내 이력서</li></a>
                     </ul>
             </div>
     </div>
@@ -283,11 +289,10 @@ $conn->close();
         function toggleLike(postnum, memberid) {
             $.post('like_toggle.php', { postnum: postnum, memberid: memberid }, function(data) {
                 var response = JSON.parse(data);
-                var likeIcon = $('#like-icon-' + postnum);
                 if (response.liked) {
-                    likeIcon.removeClass('far').addClass('fas liked');
+                    $('#like-icon-' + postnum).addClass('liked').removeClass('far').addClass('fas');
                 } else {
-                    likeIcon.removeClass('fas liked').addClass('far');
+                    $('#like-icon-' + postnum).removeClass('liked').addClass('far').removeClass('fas');
                 }
                 $('#like-count-' + postnum).text(response.like_count);
             });
