@@ -290,7 +290,7 @@ $conn->close();
                 <div class="question-item">
                     <h3><?php echo htmlspecialchars($question['username']); ?></h3><br>
                     <p><?php echo nl2br(htmlspecialchars($question['question'])); ?></p><br>
-                    <p>질문 등록 시간: <?php echo date('Y-m-d H:i', strtotime($question['question_created_at'])); ?></p><br><br>
+                    <p>질문 등록 시간: <?php echo date('Y-m-d H:i', strtotime($question['question_created_at'])); ?></p><br><hr><br>
                     <?php if (isset($_SESSION['adminid'])): ?>
                         <!-- 관리자용 답변 입력란 -->
                         <form method="post" action="reply.php">

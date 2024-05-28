@@ -9,10 +9,9 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
 
 // 게시글 목록 조회
 $posts = [];
-if ($stmt = $conn->prepare("SELECT p.postnum, p.memberid, p.posttitle, p.postcontent, p.postdate, m.name, (SELECT COUNT(*) FROM likes WHERE postnum = p.postnum) as like_count FROM post p JOIN membertbl m ON p.memberid = m.memberid ORDER BY p.postdate DESC")) {
-    $stmt->execute();
+$stmt = $conn->prepare("SELECT p.postnum, p.memberid, p.posttitle, p.postcontent, p.postdate, m.name, (SELECT COUNT(*) FROM likes WHERE postnum = p.postnum) AS like_count FROM post p JOIN membertbl m ON p.memberid = m.memberid ORDER BY p.postnum DESC");
+if ($stmt->execute()) {
     $result = $stmt->get_result();
-
     while ($row = $result->fetch_assoc()) {
         $posts[] = $row;
     }
@@ -20,7 +19,6 @@ if ($stmt = $conn->prepare("SELECT p.postnum, p.memberid, p.posttitle, p.postcon
 } else {
     echo "SQL 문을 준비하는데 오류가 발생했습니다: " . $conn->error;
 }
-
 $conn->close();
 ?>
 
@@ -169,11 +167,11 @@ $conn->close();
         <div>
             <?php foreach ($posts as $post): ?>
                 <div class="post" onclick="viewPost(<?= $post['postnum']; ?>)">
-                    <h2><?= htmlspecialchars($post['posttitle']); ?></h2>
-                    <p><?= nl2br(htmlspecialchars($post['postcontent'])); ?></p>
+                    <p style="font-size: 24px;"><span style="color: blue;">Q. </span> <?= htmlspecialchars($post['posttitle']); ?></p><br>
+                    <p><?= nl2br(htmlspecialchars($post['postcontent'])); ?></p><br>
                     <p>작성자: <?= htmlspecialchars($post['name']); ?></p>
-                    <p>게시일: <?= htmlspecialchars($post['postdate']); ?></p>
-                    <p><i id="like-icon-<?= $post['postnum']; ?>" class="far fa-heart like-icon <?= ($post['like_count'] > 0 ? 'liked' : '') ?>" onclick="event.stopPropagation(); toggleLike(<?= $post['postnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $post['postnum']; ?>"><?= $post['like_count']; ?></span></p>
+                    <p>게시일: <?= htmlspecialchars($post['postdate']); ?></p><br>
+                    <p><i id="like-icon-<?= $post['postnum']; ?>" class="fa-heart like-icon <?= $post['like_count'] ? 'fas liked' : 'far' ?>" onclick="event.stopPropagation(); toggleLike(<?= $post['postnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $post['postnum']; ?>"><?= $post['like_count']; ?></span></p>
                     <?php if ($_SESSION['memberid'] == $post['memberid']): ?><br><br>
                         <button onclick="event.stopPropagation(); editPost(<?= $post['postnum']; ?>)">수정</button>
                         <button class="delete-button" onclick="event.stopPropagation(); deletePost(<?= $post['postnum']; ?>)">삭제</button>
@@ -285,10 +283,11 @@ $conn->close();
         function toggleLike(postnum, memberid) {
             $.post('like_toggle.php', { postnum: postnum, memberid: memberid }, function(data) {
                 var response = JSON.parse(data);
+                var likeIcon = $('#like-icon-' + postnum);
                 if (response.liked) {
-                    $('#like-icon-' + postnum).addClass('liked').removeClass('far').addClass('fas');
+                    likeIcon.removeClass('far').addClass('fas liked');
                 } else {
-                    $('#like-icon-' + postnum).removeClass('liked').addClass('far').removeClass('fas');
+                    likeIcon.removeClass('fas liked').addClass('far');
                 }
                 $('#like-count-' + postnum).text(response.like_count);
             });
