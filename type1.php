@@ -55,71 +55,9 @@ session_start();
     </style>
 </head>
 <body>
-    <header class="header">
-        <a href="main.php"><img src="logo.png"></a>
-        <ul class="menu">
-        <li>
-                기업 소개
-                <ul>
-                    <a href="hello.php"><li>인사말</li></a>
-                    <a href="history.php"><li>DroneSpace 연혁</li></a>
-                    <a href="vision.php"><li>아카데미 비전</li></a>
-                    <a href="facility.php"><li>시설 현황</li></a>
-                    <a href="map.php"><li>오시는 길</li></a>
-                </ul>
-            </li>
-            <li>
-            <span class="menuli">국가 자격증</span>
-                <ul>
-                    <a href="information.php"><li>국가 자격증 안내</li></a>
-                    <a href="money.php"><li>교육비 지원 안내</li></a>
-                    <a href="company.php"><li>기관/단체 교육 안내</li></a>
-                    <a href="type1.php"><li>1종 조종자 과정</li></a>
-                    <a href="type2.php"><li>2종 조종자 과정</li></a>
-                    <a href="type3.php"><li>3종 조종자 과정</li></a>
-                    <a href="education.php"><li>드론 운용자 교육</li></a>
-                    <a href="instructor.php"><li>지도 조종자 과정</li></a>
-                    <a href="practical.php"><li>실기 평가자 과정</li></a>
-                </ul>
-            </li>
-            <li>
-                구인 & 구직
-                <ul>
-                    <a href="area.php"><li>지역별</li></a>
-                    <a href="certificate.php"><li>자격증별</li></a>
-                </ul>
-            </li>
-            <li>
-                커뮤니티
-                <ul>
-                    <a href="everything.php"><li>전체글</li></a>
-                    <a href="hot.php"><li>HOT글</li></a>
-                    <a href="ask.php"><li>1대1 질문 게시판</li></a>
-                </ul>
-            </li>
-            <li>
-                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
-                    <a href="logout.php" style="color: black;">로그아웃</a>
-                <?php else: ?>
-                    <a href="login.html" style="color: black;">로그인 / 회원가입</a>
-                <?php endif; ?>
-            </li>
-            <li>
-                마이 페이지
-                <ul>
-                    <a href="mywrite.php"><li>내가 작성한 게시글</li></a>
-                    <a href="myreply.php"><li>내가 작성한 댓글</li></a>
-                    <a href="application.php"><li>구인&구직 신청 현황</li></a>
-                    <a href="mycer.php"><li>내 이력서</li></a>
-                </ul>
-            </li>
-        </ul>
-        <div class="hamburger" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </header>
+    <?php
+        require_once "header.php";
+    ?>
     <section class="showcase">
         <div class="container">
             <h1>드론 국가자격증 1종 과정</h1>

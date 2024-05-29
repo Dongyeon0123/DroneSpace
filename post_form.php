@@ -149,10 +149,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div>
                 <h2>구인 & 구직</h2>
-                    <ul>
-                        <li><a href="area.php">지역별</a></li>
-                        <li><a href="certificate.php">자격증별</a></li>
-                    </ul>
+                <ul>
+                    <a href="recruitment.php"><li>전체글</li></a>
+                </ul>
             </div>
             <div>
                 <h2 style="color: red;">커뮤니티</h2>

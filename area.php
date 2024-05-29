@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>구인&구직 게시판</title>
+    <title>구인 게시판</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
         .container {
             width: 80%;
             margin: auto;
@@ -66,16 +73,17 @@
             padding: 10px;
             margin-bottom: 10px;
         }
+        .main-content textarea {
+            height: 200px;
+        }
         .region-selection fieldset,
         .region-selection fieldset label {
             width: 100%;
         }
-
         .region-selection fieldset legend {
             font-size: 1em;
             margin-bottom: 10px;
         }
-
         .region-selection button[type="reset"] {
             margin-left: 20px;
         }
@@ -85,7 +93,6 @@
         .region-selection fieldset label {
             width: 70%;
         }
-
         .post-creation fieldset legend,
         .region-selection fieldset legend {
             font-size: 1em;
@@ -93,7 +100,7 @@
         }
         button[type="submit"],
         button[type="reset"] {
-            background-color: #4CAF50; /* Green background */
+            background-color: #4CAF50;
             border: none;
             color: white;
             padding: 5px 10px;
@@ -106,19 +113,16 @@
             cursor: pointer;
             border-radius: 12px;
         }
-
         button[type="submit"]:hover,
         button[type="reset"]:hover {
-            background-color: #366e39; /* Darker green */
+            background-color: #366e39;
         }
         label {
-            display: inline-block; /* 인라인 블록으로 변경 */
-            margin-right: 10px; /* 각 레이블 사이의 간격 조정 */
+            display: inline-block;
+            margin-right: 10px;
         }
-
-        /* 선택한 체크박스에 체크 표시 스타일링 */
         input[type="checkbox"]:checked + label {
-            font-weight: bold; /* 선택한 경우 텍스트 굵게 표시 */
+            font-weight: bold;
         }
         .inline-fieldset {
             display: inline-block;
@@ -147,7 +151,7 @@
     <header>
         <div class="container">
             <div id="branding">
-                <h1>구인&구직 게시판</h1>
+                <h1>구인 게시판</h1>
             </div>
         </div>
     </header>
@@ -174,7 +178,12 @@
                 <label for="postTitle">제목</label>
                 <input type="text" id="postTitle" name="postTitle" required>
                 <label for="postContent">내용</label>
-                <textarea id="postContent" name="postContent" required></textarea>
+                <textarea id="postContent" name="postContent" placeholder="ex)기업명:
+근무 지역:
+근무 시간:
+우대 자격증 조건:
+구인자:
+연락처: " required></textarea>
                 <br><button type="submit">게시글 올리기</button>
             </form>
         </div>
@@ -210,8 +219,9 @@
                 <thead>
                     <tr>
                         <th>제목</th>
-                        <th>내용</th>
                         <th>게시한 날짜</th>
+                        <th>지원</th>
+                        <th>삭제</th>
                     </tr>
                 </thead>
                 <tbody id="posts">
@@ -223,68 +233,147 @@
 
     <script>
         function filterPosts() {
-        const selectedRegions = Array.from(document.querySelectorAll('input[name="region"]:checked')).map(checkbox => checkbox.value);
-        const selectedCertificates = Array.from(document.querySelectorAll('input[name="certificate"]:checked')).map(checkbox => checkbox.value);
-        const posts = document.querySelectorAll('.post');
+            const selectedRegions = Array.from(document.querySelectorAll('input[name="region"]:checked')).map(checkbox => checkbox.value);
+            const selectedCertificates = Array.from(document.querySelectorAll('input[name="certificate"]:checked')).map(checkbox => checkbox.value);
+            const posts = document.querySelectorAll('.post');
 
-        posts.forEach(post => {
-            const postRegions = post.dataset.region.split(',');
-            const postCertificates = post.dataset.certificate.split(',');
+            posts.forEach(post => {
+                const postRegions = post.dataset.region.split(',');
+                const postCertificates = post.dataset.certificate.split(',');
 
-            const regionMatch = selectedRegions.length === 0 || selectedRegions.some(region => postRegions.includes(region));
-            const certificateMatch = selectedCertificates.length === 0 || selectedCertificates.some(certificate => postCertificates.includes(certificate));
+                const regionMatch = selectedRegions.length === 0 || selectedRegions.some(region => postRegions.includes(region));
+                const certificateMatch = selectedCertificates.length === 0 || selectedCertificates.some(certificate => postCertificates.includes(certificate));
 
-            if (regionMatch && certificateMatch) {
-                post.classList.remove('hidden');
-            } else {
-                post.classList.add('hidden');
-            }
-        });
-    }
-
-    document.getElementById('regionForm').addEventListener('change', filterPosts);
-
-    document.getElementById('postForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const selectedRegions = Array.from(document.querySelectorAll('input[name="postRegion"]:checked')).map(checkbox => checkbox.value);
-        if (selectedRegions.length === 0) {
-            alert('지역을 선택해주세요.'); // 선택된 지역이 없으면 알림 표시
-            return; // 폼 제출 중지
+                if (regionMatch && certificateMatch) {
+                    post.classList.remove('hidden');
+                } else {
+                    post.classList.add('hidden');
+                }
+            });
         }
 
-        const postTitle = document.getElementById('postTitle').value;
-        const postContent = document.getElementById('postContent').value;
-        const postRegions = selectedRegions;
-        const postCertificates = Array.from(document.querySelectorAll('input[name="postCertificate"]:checked')).map(checkbox => checkbox.value);
-        const postDate = new Date().toISOString().split('T')[0]; // 게시한 날짜
+        document.getElementById('regionForm').addEventListener('change', filterPosts);
 
-        const postRow = document.createElement('tr');
-        postRow.className = 'post';
-        postRow.dataset.region = postRegions.join(',');
-        postRow.dataset.certificate = postCertificates.join(',');
-        postRow.innerHTML = `<td>${postTitle}</td><td>${postContent}</td><td>${postDate}</td>`;
+        document.getElementById('postForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const selectedRegions = Array.from(document.querySelectorAll('input[name="postRegion"]:checked')).map(checkbox => checkbox.value);
+            if (selectedRegions.length === 0) {
+                alert('지역을 선택해주세요.');
+                return;
+            }
 
-        const postsTable = document.getElementById('posts');
-        postsTable.insertBefore(postRow, postsTable.firstChild);
+            const postTitle = document.getElementById('postTitle').value;
+            const postContent = document.getElementById('postContent').value;
+            const postRegions = selectedRegions;
+            const postCertificates = Array.from(document.querySelectorAll('input[name="postCertificate"]:checked')).map(checkbox => checkbox.value);
+            const postDate = new Date().toISOString().split('T')[0];
 
-        postRow.classList.remove('hidden'); // Ensure new post is displayed
+            const postRow = document.createElement('tr');
+            postRow.className = 'post';
+            postRow.dataset.region = postRegions.join(',');
+            postRow.dataset.certificate = postCertificates.join(',');
+            postRow.dataset.content = postContent; // 저장된 게시글 내용을 data-content 속성에 추가
+            postRow.innerHTML = `<td><a href="#" class="postTitleLink">${postTitle}</a></td><td>${postDate}</td><td><button class="applyButton">지원하기</button></td><td><button class="deleteButton">삭제</button></td>`;
 
-        document.getElementById('postForm').reset();
+            const postsTable = document.getElementById('posts');
+            postsTable.insertBefore(postRow, postsTable.firstChild);
 
-        filterPosts(); // Filter posts after adding new post
-    });
+            postRow.classList.remove('hidden');
 
-    document.getElementById('resetButton').addEventListener('click', function() {
-        const posts = document.querySelectorAll('.post');
-        posts.forEach(post => {
-            post.classList.remove('hidden');
+            document.getElementById('postForm').reset();
+
+            filterPosts();
         });
-    });
 
-    // Display all posts initially
-    document.addEventListener('DOMContentLoaded', filterPosts);
+        document.getElementById('resetButton').addEventListener('click', function() {
+            const posts = document.querySelectorAll('.post');
+            posts.forEach(post => {
+                post.classList.remove('hidden');
+            });
+        });
 
+        document.getElementById('posts').addEventListener('click', function(event) {
+            if (event.target.classList.contains('applyButton')) {
+                window.open("submithire.php", "popup", "width=600,height=800");
+            }
+        });
+
+        document.getElementById('posts').addEventListener('click', function(event) {
+            if (event.target.classList.contains('deleteButton')) {
+                event.target.closest('tr').remove();
+                filterPosts();
+            }
+        });
+
+        // 게시글 제목 링크 클릭 시 해당 게시글의 내용을 새 창에서 보기 좋게 표시
+        document.getElementById('posts').addEventListener('click', function(event) {
+            if (event.target.classList.contains('postTitleLink')) {
+                event.preventDefault();
+                const postContent = event.target.closest('tr').dataset.content; // 저장된 게시글 내용을 가져옴
+                const postTitle = event.target.innerText;
+                const postDate = event.target.closest('tr').querySelector('td:nth-child(2)').innerText;
+
+                const postWindow = window.open("", "postWindow", "width=600,height=400");
+                postWindow.document.write(`
+                    <html>
+                        <head>
+                            <title>${postTitle}</title>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    margin: 0;
+                                    padding: 20px;
+                                    background-color: #f4f4f4;
+                                }
+                                .post-container {
+                                    background: #fff;
+                                    padding: 20px;
+                                    border-radius: 8px;
+                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                }
+                                h1 {
+                                    border-bottom: 2px solid #ddd;
+                                    padding-bottom: 10px;
+                                }
+                                p {
+                                    white-space: pre-wrap; /* 줄바꿈을 유지 */
+                                }
+                                .post-date {
+                                    color: #777;
+                                    font-size: 0.9em;
+                                }
+                                .close-button {
+                                    display: block;
+                                    margin: 20px 0 0;
+                                    padding: 10px 20px;
+                                    background-color: #4CAF50;
+                                    color: white;
+                                    text-align: center;
+                                    border: none;
+                                    border-radius: 5px;
+                                    font-size: 16px;
+                                    cursor: pointer;
+                                }
+                                .close-button:hover {
+                                    background-color: #45a049;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="post-container">
+                                <h1>${postTitle}</h1>
+                                <p>${postContent}</p>
+                                <p class="post-date">게시한 날짜: ${postDate}</p>
+                                <button class="close-button" onclick="window.close()">닫기</button>
+                            </div>
+                        </body>
+                    </html>
+                `);
+                postWindow.document.close();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', filterPosts);
     </script>
 </body>
 </html>
-
