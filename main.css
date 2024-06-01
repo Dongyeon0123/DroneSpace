@@ -4,26 +4,56 @@ body {
     background-color: #f4f4f4;
     color: #333;
 }
+
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
-    padding: 10px 35px;
+    background-image: url('world.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 50px 35px;
     border-bottom: 2px solid #000;
+    transition: top 0.3s;
+    z-index: 1000;
+    position: relative;
 }
-.header img {
+
+.scroll-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px 35px;
+    position: fixed;
+    top: -130px;
+    width: 96%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: top 0.3s;
+    z-index: 1001;
+}
+
+.scroll-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+}
+
+.header img, .scroll-header img {
     width: 200px;
     height: 90px;
     margin: 0;
-    margin-left: 100px;
 }
-.header a {
+
+.header a, .scroll-header a {
     text-decoration: none;
+    color: inherit;
 }
-.menuli {
-    color: red;
-}
+
 .menu {
     list-style-type: none;
     padding: 0;
@@ -31,66 +61,74 @@ body {
     font-weight: bold;
     margin-top: 20px;
 }
+
 .menu li {
     position: relative;
     padding: 10px;
     cursor: pointer;
 }
+
 .menu li ul {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 175px;  /* 너비 조정이 필요하면 수정 */
+    width: 175px;
     background-color: rgb(227, 227, 227);
     list-style: none;
     padding: 0;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-top: 5px solid rgb(51, 179, 57);
+    border-top: 4px solid rgb(51, 179, 57);
+    border-radius: 0 0 10px 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     visibility: hidden;
     opacity: 0;
     overflow: hidden;
-    transition: all 0.5s ease-in-out; /* 효과 지속시간과 타이밍 함수 조정 */
+    transition: all 0.5s ease-in-out;
     z-index: 1000;
 }
+
 .menu li:hover ul {
     visibility: visible;
     opacity: 1;
 }
+
 .menu li:not(:last-child)::after {
     content: "|";
     color: rgb(156, 154, 154);
     margin-left: 30px;
     margin-right: 20px;
 }
+
 .menu li ul li:not(:last-child)::after {
     content: none;
 }
+
 .menu li ul li {
     width: 145px;
     padding: 15px;
     text-align: center;
 }
+
 .menu li ul li:hover {
     background-color: rgb(51, 179, 57);
     color: white;
 }
+
 .menu li ul li:last-child {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 0 0 10px 10px;
 }
+
 .menu li ul li a {
-    display: block;  /* 링크를 블록 레벨 요소로 만듦 */
-    width: 100%;  /* a 태그가 li의 전체 너비를 차지하도록 설정 */
-    padding: 15px;  /* 클릭 영역을 넓히고, 텍스트 중앙 정렬을 위한 패딩 추가 */
-    color: black;  /* 기본 텍스트 색상 */
-    text-decoration: none;  /* 밑줄 제거 */
+    display: block;
+    width: 100%;
+    padding: 15px;
+    color: black;
+    text-decoration: none;
 }
 
 .menu a li {
     color: black;
 }
+
 .hamburger {
     display: flex;
     flex-direction: column;
@@ -100,18 +138,22 @@ body {
     cursor: pointer;
     z-index: 1001;
 }
+
 .hamburger div {
     width: 100%;
     height: 3px;
     background-color: #333;
     transition: all 0.3s ease-in-out;
 }
+
 .hamburger:hover div:nth-child(1) {
     width: 50%;
 }
+
 .hamburger:hover div:nth-child(3) {
     width: 50%;
 }
+
 .menu-overlay {
     position: fixed;
     top: 0;
@@ -132,7 +174,7 @@ body {
     cursor: pointer;
     font-size: 24px;
     color: white;
-    z-index: 101;  /* 메뉴 위에 보이도록 z-index 설정 */
+    z-index: 101;
 }
 
 .menu-overlay.show {
@@ -148,10 +190,11 @@ body {
     margin-left: 220px;
     text-align: center;
 }
+
 .menu-overlay .image-container {
     display: flex;
-    justify-content: center; /* 가로 중앙 정렬 */
-    width: 100%; /* 부모 컨테이너의 전체 너비 사용 */
+    justify-content: center;
+    width: 100%;
 }
 
 .menu-overlay img {
@@ -162,12 +205,14 @@ body {
     border-radius: 8px;
     margin-top: 60px;
 }
+
 .menu-overlay-content h2 {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 44px;
     color: white;
 }
+
 .menu-overlay-content ul {
     list-style: none;
     padding: 0;
@@ -183,7 +228,6 @@ body {
     color: white;
     text-decoration: none;
 }
-
 
 .menu-overlay-content ul li a:hover {
     background-color: rgba(255, 255, 255, 0.1);

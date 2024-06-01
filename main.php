@@ -27,6 +27,7 @@ session_start();
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: opacity 1s ease-in-out; /* 페이드 인/아웃 효과를 위한 트랜지션 */
             z-index: -1;
         }
         .content, .search-container {
@@ -218,9 +219,9 @@ session_start();
         }
 
         const images = [
-            'konkuk2.jpg',
-            'konkuk3.jpg',
-            'konkuk4.jpg'
+            'konkuk1.jpeg',
+            'konkuk2.jpeg',
+            'konkuk3.jpeg'
         ];
 
         let currentIndex = 0;
@@ -231,14 +232,22 @@ session_start();
 
             // Hide video and show image after 10 seconds
             setTimeout(() => {
-                video.style.display = 'none';
-                image.style.display = 'block';
+                video.style.opacity = '0';
+                setTimeout(() => {
+                    video.style.display = 'none';
+                    image.style.display = 'block';
+                    image.style.opacity = '1';
+                }, 1000); // Allow time for fade out
             }, 10000);
 
             // Change image every 10 seconds
             setInterval(() => {
-                image.src = images[currentIndex];
-                currentIndex = (currentIndex + 1) % images.length;
+                image.style.opacity = '0';
+                setTimeout(() => {
+                    image.src = images[currentIndex];
+                    image.style.opacity = '1';
+                    currentIndex = (currentIndex + 1) % images.length;
+                }, 1000); // Allow time for fade out
             }, 10000);
         }
 
@@ -250,6 +259,28 @@ session_start();
             window.open('admin_login.html', '_blank'); // 새 탭에서 admin_register.html 열기
             }
         });
+        
+        window.addEventListener('scroll', function() {
+            const scrollheader = document.getElementById('scrollheader');
+            const mainHeader = document.getElementById('mainHeader');
+            if (window.scrollY > 150) {
+                mainHeader.style.top = '-130px';
+                scrollheader.style.top = '0px';
+            } else {
+                mainHeader.style.top = '0px';
+                scrollheader.style.top = '-130px';
+            }
+        });
+
+        function toggleMenu() {
+            var menuOverlay = document.getElementById('menuOverlay');
+            menuOverlay.classList.toggle('show');
+        }
+
+        function closeMenu() {
+            var menuOverlay = document.getElementById('menuOverlay');
+            menuOverlay.classList.remove('show');
+        }
     </script>
 </body>
 </html>
