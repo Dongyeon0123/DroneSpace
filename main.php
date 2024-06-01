@@ -12,10 +12,58 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="main.css">
     <style>
+        .content-background {
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+        .content-background video, .content-background img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .content, .search-container {
+            position: relative;
+            text-align: center;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            max-width: 80%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+            margin-top: 15px;
+            margin-bottom: 35px;
+        }
+        .notice {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .content hr {
+            width: 60px;
+            height: 3px;
+            background-color: #fff;
+            border: none;
+            margin: 20px auto;
+        }
+        .content span {
+            display: block;
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
         .search-container {
             text-align: center;
             padding: 20px;
             padding-bottom: 2px;
+            margin-top: 20px;
         }
         #searchInput {
             padding: 18px 50px;
@@ -40,61 +88,35 @@ session_start();
         #searchButton:hover {
             background-color: #0056b3;
         }
-        .content-background {
-            position: relative;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-            transition: background-image 1s ease-in-out;
-        }
-        .content {
-            text-align: left;
-            margin: 70px 150px;
-            padding: 50px;
-            border-radius: 10px;
-            color: white;
-        }
-        .notice {
-            font-size: 32px;
-        }
-        .content hr {
-            width: 50px;
-            height: 3px;
-            background-color: #fff;
-            border: none;
-            margin: 20px 0;
-        }
-        .content span {
-            display: block;
-            margin-top: 20px;
-        }
         .grid-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
-            margin: 20px 150px;
+            margin: 20px auto;
+            max-width: 80%;
         }
         .grid-item {
-            display: flex;
-            align-items: center;
-            background-color: #fff;
-            padding: 10px;
+            display: block;
+            background-color: white;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            text-decoration: none;
+            color: black;
         }
-        .grid-item img {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin-right: 20px;
+        .grid-item:hover {
+            background-color: #f0f0f0;
         }
         .grid-item p {
             margin: 0;
+            font-size: 16px;
         }
         .section {
             background-color: #fff;
             padding: 50px 150px;
             margin: 20px 0;
+            text-align: center;
         }
         .section h2 {
             font-size: 36px;
@@ -115,7 +137,6 @@ session_start();
             color: white;
             text-align: center;
             padding: 20px;
-            position: relative;
         }
         .footer a {
             color: white;
@@ -127,115 +148,50 @@ session_start();
     <?php
         require_once "header.php";
     ?>
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="키워드를 검색해보세요.">
-        <button id="searchButton" onclick="search()">검색</button>
-        <ul id="searchResults">
-            <!-- 검색 결과가 여기에 표시됩니다 -->
-        </ul>
-    </div>
 
-    <div class="content-background">
+    <div class="content-background" id="contentBackground">
+        <video autoplay muted loop id="backgroundVideo">
+            <source src="konkuk.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <img src="konkuk2.jpg" id="backgroundImage" style="display:none;">
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="키워드를 검색해보세요.">
+            <button id="searchButton" onclick="search()">검색</button>
+            <ul id="searchResults">
+                <!-- 검색 결과가 여기에 표시됩니다 -->
+            </ul>
+        </div>
+
         <div class="content">
-            <span class="notice">건국대학교 드론 아카데미<br>
-                Drone Space를 <b>소개합니다.</b>
+            <span class="notice"><h2>건국대학교 드론 아카데미<br>
+                Drone Space를 <b>소개합니다.</b></h2>
             </span>
             <hr>
-            <span>건국대학교 Drone Space는 <br>
-            대충 소개하는 글</span>
+            <span>드론과 커뮤니티가 만나는 혁신적인 구인구직 플랫폼 Drone Space에 오신 것을 환영합니다!<br>
+            Drone Space는 드론 산업의 전문성을 바탕으로, 구인자와 구직자 모두에게 최적의 기회를 제공합니다.<br>
+            최신 드론 기술과 관련된 다양한 직업군을 한눈에 살펴보고,
+            나에게 딱 맞는 일자리를 손쉽게 찾을 수 있습니다.</span>
         </div>
 
         <div class="grid-container">
-            <div class="grid-item">
-                <img src="https://placehold.co/100x100" alt="공지사항 이미지 1">
-                <p>공지사항 1</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/100x100" alt="공지사항 이미지 2">
-                <p>공지사항 2</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/100x100" alt="공지사항 이미지 3">
-                <p>공지사항 3</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/100x100" alt="공지사항 이미지 4">
-                <p>공지사항 4</p>
-            </div>
+            <a href="hello.php" class="grid-item">
+                <p>메인 페이지 소개</p>
+            </a>
+            <a href="information.php" class="grid-item">
+                <p>국가 자격증 안내</p>
+            </a>
+            <a href="facility.php" class="grid-item">
+                <p>시설 현황</p>
+            </a>
+            <a href="everything.php" class="grid-item">
+                <p>커뮤니티</p>
+            </a>
+            <a href="map.php" class="grid-item">
+                <p>오시는 길</p>
+            </a>
         </div>
-    </div>
-
-    <div class="section">
-        <h2>Our Services</h2>
-        <div class="grid-container">
-            <div class="grid-item">
-                <img src="https://placehold.co/400x300" alt="UX/UI Designer">
-                <p>UX/UI Designer</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/400x300" alt="Interaction Designer">
-                <p>Interaction Designer</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/400x300" alt="Motion Graphic Designer">
-                <p>Motion Graphic Designer</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/400x300" alt="3D Designer">
-                <p>3D Designer</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Recent Projects</h2>
-        <div class="grid-container">
-            <div class="grid-item">
-                <img src="https://placehold.co/400x300" alt="Project 1">
-                <p>Project 1</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/400x300" alt="Project 2">
-                <p>Project 2</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/400x300" alt="Project 3">
-                <p>Project 3</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/400x300" alt="Project 4">
-                <p>Project 4</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Clients</h2>
-        <div class="grid-container">
-            <div class="grid-item">
-                <img src="https://placehold.co/200x100" alt="Client 1">
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/200x100" alt="Client 2">
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/200x100" alt="Client 3">
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/200x100" alt="Client 4">
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/200x100" alt="Client 5">
-            </div>
-            <div class="grid-item">
-                <img src="https://placehold.co/200x100" alt="Client 6">
-            </div>
-        </div>
-    </div>
-
-    <div class="section" style="background-color: #333; color: white;">
-        <h2>Contact Us</h2>
-        <p>여러분의 프로젝트에 대해 자세히 이야기해보고 싶습니다. 언제든지 연락주세요.</p>
     </div>
 
     <footer class="footer">
@@ -262,7 +218,6 @@ session_start();
         }
 
         const images = [
-            'konkuk.jpg',
             'konkuk2.jpg',
             'konkuk3.jpg',
             'konkuk4.jpg'
@@ -270,14 +225,24 @@ session_start();
 
         let currentIndex = 0;
 
-        function changeBackgroundImage() {
-            const backgroundImageElement = document.querySelector('.content-background'); // 배경 이미지를 변경할 요소 선택
-            backgroundImageElement.style.backgroundImage = `url('${images[currentIndex]}')`; // 현재 인덱스의 이미지로 배경 설정
-            currentIndex = (currentIndex + 1) % images.length; // 다음 이미지 인덱스로 업데이트
+        function changeBackground() {
+            const video = document.getElementById('backgroundVideo');
+            const image = document.getElementById('backgroundImage');
+
+            // Hide video and show image after 10 seconds
+            setTimeout(() => {
+                video.style.display = 'none';
+                image.style.display = 'block';
+            }, 10000);
+
+            // Change image every 10 seconds
+            setInterval(() => {
+                image.src = images[currentIndex];
+                currentIndex = (currentIndex + 1) % images.length;
+            }, 10000);
         }
 
-        setInterval(changeBackgroundImage, 10000); // 10초마다 changeBackgroundImage 함수 호출
-
+        document.addEventListener('DOMContentLoaded', changeBackground);
 
         document.addEventListener('keydown', function(event) {
         if (event.metaKey && event.shiftKey && event.key === 'l') {

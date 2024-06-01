@@ -144,7 +144,7 @@ session_start();
     </section>
 
     <footer>
-        <p>&copy; 2024 Drone Space</p>
+        <p>Copyright &copy; 2024 Drone Space</p>
     </footer>
     <script>
         function toggleMenu() {
