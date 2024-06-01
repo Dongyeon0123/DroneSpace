@@ -118,7 +118,7 @@ $conn->close();
                 <div class="recruitment" onclick="viewRecruitment(<?= $recruit['recruitnum']; ?>)">
                     <h2><?= htmlspecialchars($recruit['title']); ?></h2>
                     <p><?= nl2br(htmlspecialchars($recruit['description'])); ?></p>
-                    <p>작성자: <?= htmlspecialchars($recruit['name']); ?></p>
+                    <p>작성자: <?= htmlspecialchars($recruit['memberid']); ?></p>
                     <p>게시일: <?= htmlspecialchars($recruit['postdate']); ?></p>
                     <p><i id="like-icon-<?= $recruit['recruitnum']; ?>" class="fa-heart like-icon <?= $recruit['like_count'] ? 'fas liked' : 'far' ?>" onclick="event.stopPropagation(); toggleLike(<?= $recruit['recruitnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $recruit['recruitnum']; ?>"><?= $recruit['like_count']; ?></span></p>
                     <?php if ($_SESSION['memberid'] == $recruit['memberid']): ?><br><br>

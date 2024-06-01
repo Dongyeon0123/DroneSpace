@@ -154,7 +154,7 @@ $conn->close();
         <div class="post">
             <p style="font-size: 24px;"><span style="color: blue;">Q. </span> <?= htmlspecialchars($posttitle); ?></p><br>
             <p><?= nl2br(htmlspecialchars($postcontent)); ?></p><br><br>
-            <p>작성자: <?= htmlspecialchars($name); ?></p>
+            <p>작성자: <?= htmlspecialchars($memberid); ?></p>
             <p>게시일: <?= htmlspecialchars($postdate); ?></p><br>
             <p><i id="like-icon-<?= $postnum; ?>" class="fa-heart like-icon <?= ($user_liked > 0 ? 'fas liked' : 'far') ?>" onclick="toggleLike(<?= $postnum; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $postnum; ?>"><?= $like_count; ?></span></p>
             <?php if ($_SESSION['memberid'] == $memberid): ?><br><br>

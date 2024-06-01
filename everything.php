@@ -113,7 +113,7 @@ $conn->close();
                 <div class="post" onclick="viewPost(<?= $post['postnum']; ?>)">
                     <p style="font-size: 24px;"><span style="color: blue;">Q. </span> <?= htmlspecialchars($post['posttitle']); ?></p><br>
                     <p><?= nl2br(htmlspecialchars($post['postcontent'])); ?></p><br>
-                    <p>작성자: <?= htmlspecialchars($post['name']); ?></p>
+                    <p>작성자: <?= htmlspecialchars($post['memberid']); ?></p>
                     <p>게시일: <?= htmlspecialchars($post['postdate']); ?></p><br>
                     <p><i id="like-icon-<?= $post['postnum']; ?>" class="fa-heart like-icon <?= ($post['user_liked'] > 0 ? 'fas liked' : 'far') ?>" onclick="event.stopPropagation(); toggleLike(<?= $post['postnum']; ?>, '<?= $_SESSION['memberid']; ?>');"></i> : <span id="like-count-<?= $post['postnum']; ?>"><?= $post['like_count']; ?></span></p>
                     <?php if ($_SESSION['memberid'] == $post['memberid']): ?><br><br>

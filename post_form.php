@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <header class="header">
-        <a href="main.php"><img src="logo.png"></a>
+        <a href="main.php"><img src="logo1.png"></a>
         <div class="hamburger" onclick="toggleMenu()">
             <div></div>
             <div></div>

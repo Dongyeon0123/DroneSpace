@@ -256,7 +256,7 @@ session_start();
 
         <div class="grid-container">
             <a href="hello.php" class="grid-item">
-                <p>메인 페이지 소개</p>
+                <p>사이트 소개</p>
             </a>
             <a href="information.php" class="grid-item">
                 <p>국가 자격증 안내</p>

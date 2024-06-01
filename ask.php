@@ -89,20 +89,31 @@ $conn->close();
         }
         form {
             margin-bottom: 20px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         label {
             display: block;
             margin-top: 10px;
+            font-weight: bold;
+            color: #333;
         }
         input, textarea, button {
             display: block;
             margin-top: 5px;
-        }
-        input.username, textarea.question {
-            width: 50%;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
         }
         textarea.question {
-            width: 50%; /* 질문 입력란의 너비를 줄임 */
+            resize: vertical;
+            height: 150px;
+            font-family: 'Arial', sans-serif;
         }
         button {
             width: auto;
@@ -113,6 +124,7 @@ $conn->close();
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #0056b3;
@@ -183,7 +195,7 @@ $conn->close();
             margin-top: 20px;
         }
         .comment-form button {
-            margin-top: 10px; /* 댓글 등록 버튼과 입력 칸 사이 간격 증가 */
+            margin-top: 10px;
         }
 
         .close-btn {
@@ -193,7 +205,7 @@ $conn->close();
             cursor: pointer;
             font-size: 24px;
             color: white;
-            z-index: 101;  /* 메뉴 위에 보이도록 z-index 설정 */
+            z-index: 101;
         }
     </style>
 </head>
@@ -218,7 +230,7 @@ $conn->close();
 
         <form id="questionForm" method="post" action="ask.php">
             <label for="question">질문:</label>
-            <textarea id="question" name="question" required></textarea>
+            <textarea id="question" name="question" class="question" required></textarea>
             <button type="submit">질문 등록</button>
         </form>
 
