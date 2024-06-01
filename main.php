@@ -273,8 +273,8 @@ session_start();
         </div>
     </div>
 
-    <footer class="footer">
-        Wecanverse &copy; 2024. All rights reserved.
+    <footer>
+        <p>Copyright &copy; 2024 Drone Space</p>
     </footer>
     
     <div id="searchModal" class="modal">
