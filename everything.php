@@ -124,6 +124,9 @@ $conn->close();
             <?php endforeach; ?>
         </div>
     </div>
+    <footer class="footer">
+        <p>Copyright &copy; 2024 Drone Space</p>
+    </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         function toggleMenu() {

@@ -126,6 +126,9 @@ session_start();
         <p>이 교육 과정을 통해, 참가자들은 드론 자격증을 취득한 후에도, 실무에서 드론을 자신 있게 활용할 수 있는 역량을 갖추게 됩니다. 이는 실용적인 기술 습득을 통해 드론 운용에 대한 자신감을 높이고, 드론 기술의 현장 적용 범위를 확장하는 데 기여합니다.</p>
         <p>드론 기술의 지속적인 발전에 발맞추어, 우리의 드론 교육 프로그램도 이론적 지식에서 실용적 응용으로의 전환을 추구합니다. 이 과정은 개인과 기업, 기관 모두에게 실질적인 이점을 제공함으로써, 드론 운용에 관한 통합 솔루션을 제공하는 데 있어 우리의 전문성을 강화합니다.</p>
     </section>
+    <footer class="footer">
+        <p>Copyright &copy; 2024 Drone Space</p>
+    </footer>
     <script>
         function toggleMenu() {
             var menuOverlay = document.getElementById('menuOverlay');

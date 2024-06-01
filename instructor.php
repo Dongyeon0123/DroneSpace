@@ -149,6 +149,9 @@ session_start();
         <h2>교육 신청 및 문의</h2>
         <p>지도조종자(교관) 과정에 대한 자세한 정보 및 신청 절차는 <a href="#">교육 신청 페이지</a>에서 확인하실 수 있습니다. 본 과정은 드론 조종의 전문성을 키우고자 하는 분들에게 필요한 모든 정보를 제공하기 위해 마련되었습니다. 드론 산업에서의 리더십을 발휘하고자 하는 분들의 많은 참여를 기다립니다.</p>
     </section>
+    <footer class="footer">
+        <p>Copyright &copy; 2024 Drone Space</p>
+    </footer>
     <script>
         function toggleMenu() {
             var menuOverlay = document.getElementById('menuOverlay');

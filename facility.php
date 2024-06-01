@@ -115,7 +115,7 @@
     </div>
 
     <footer class="footer">
-        Wecanverse &copy; 2024. All rights reserved.
+        <p>Copyright &copy; 2024 Drone Space</p>
     </footer>
 </body>
 </html>

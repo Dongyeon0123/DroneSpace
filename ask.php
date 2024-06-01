@@ -257,7 +257,7 @@ $conn->close();
 
 
     <footer class="footer">
-        <p>&copy; 2024 KDEC 한국드론교육센터. 모든 권리 보유.</p>
+        <p>Copyright &copy; 2024 Drone Space</p>
     </footer>
     
     <script>

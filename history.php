@@ -300,9 +300,10 @@ session_start();
         </ul>
     </section>
 
-    <footer>
+    <footer class="footer">
         <p>Copyright &copy; 2024 Drone Space</p>
     </footer>
+
     <script>
         function toggleMenu() {
             var menuOverlay = document.getElementById('menuOverlay');

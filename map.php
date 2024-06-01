@@ -95,6 +95,9 @@ session_start();
             <li>영동고속도로 - 만종분기점 - 중앙고속도로 - 남원주 IC (충주방향) - 19번 국도 - 충주 건국 대사거리 직진 - 건국대 GLOCAL(글로컬)캠퍼스</li>
         </ul>
     </section>
+    <footer class="footer">
+        <p>Copyright &copy; 2024 Drone Space</p>
+    </footer>
     <script>
         function toggleMenu() {
             var menuOverlay = document.getElementById('menuOverlay');

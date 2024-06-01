@@ -159,6 +159,9 @@ session_start();
         <p>초경량 비행장치 실기평가자 교육 과정은 드론 조종의 전문가가 되고자 하는 분들에게 필수적인 과정입니다.
         본 과정을 통해 여러분은 공정하고 정확한 실기 평가를 수행할 수 있는 능력을 갖추게 될 것입니다.</p>
     </section>
+    <footer class="footer">
+        <p>Copyright &copy; 2024 Drone Space</p>
+    </footer>
     <script>
         function toggleMenu() {
             var menuOverlay = document.getElementById('menuOverlay');
