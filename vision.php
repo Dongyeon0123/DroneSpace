@@ -121,22 +121,22 @@ session_start();
         </div>
         <div class="vision-items">
             <div class="vision-item">
-                <img src="icon1.png" >
+                <img src="v1.png" >
                 <p class="sub-quote">정보제공을 통한 혁신</p>
                 <p class="description">보다 더 전문적인 정보를 제공하여 기술적 진입장벽을 낮추겠습니다.</p>
             </div>
             <div class="vision-item">
-                <img src="icon2.png" >
+                <img src="v2.png" >
                 <p class="sub-quote">구인구직 중개시스템 구축</p>
                 <p class="description">구인자는 사이트를 통해 검증된 <br>구직자를 구할 수 있습니다.</p>
             </div>
             <div class="vision-item">
-                <img src="icon3.png" >
+                <img src="v3.png" >
                 <p class="sub-quote">상호평가 시스템</p>
                 <p class="description">사이트 이용자간 평가를 통해 <br>개인 신뢰도 반영합니다.</p>
             </div>
             <div class="vision-item">
-                <img src="icon4.png" >
+                <img src="v4.png" >
                 <p class="sub-quote">무한한 성장가능성</p>
                 <p class="description">최신기술의 트랜드 파악과 학습을 통해 앞으로의 변화를 예측하여 <br>선도하겠습니다.</p>
             </div>
