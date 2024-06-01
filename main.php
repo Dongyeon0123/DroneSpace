@@ -273,7 +273,7 @@ session_start();
         </div>
     </div>
 
-    <footer>
+    <footer class="footer">
         <p>Copyright &copy; 2024 Drone Space</p>
     </footer>
     
