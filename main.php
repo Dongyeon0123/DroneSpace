@@ -72,6 +72,7 @@ session_start();
             border-radius: 5px;
             font-size: 14px;
             width: 50%;
+            margin-bottom: 20px;
         }
         #searchInput:focus {
             outline: none;
@@ -143,6 +144,86 @@ session_start();
             color: white;
             text-decoration: none;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease-in-out;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .search-result {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-result:hover {
+            background-color: #f0f0f0;
+        }
+
+        .search-result h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .search-result p {
+            margin: 5px 0 0;
+            color: #555;
+        }
+
+        /* 애니메이션 효과 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -159,10 +240,7 @@ session_start();
 
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="키워드를 검색해보세요.">
-            <button id="searchButton" onclick="search()">검색</button>
-            <ul id="searchResults">
-                <!-- 검색 결과가 여기에 표시됩니다 -->
-            </ul>
+            <button id="searchButton">검색</button>
         </div>
 
         <div class="content">
@@ -198,6 +276,14 @@ session_start();
     <footer class="footer">
         Wecanverse &copy; 2024. All rights reserved.
     </footer>
+    
+    <div id="searchModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>검색 결과</h2>
+            <div id="searchResults"></div>
+        </div>
+    </div>
 
     <script>
         function toggleMenu() {
@@ -280,6 +366,45 @@ session_start();
         function closeMenu() {
             var menuOverlay = document.getElementById('menuOverlay');
             menuOverlay.classList.remove('show');
+        }
+        
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const keyword = document.getElementById('searchInput').value;
+            if (!keyword) return;
+
+            fetch(`search.php?keyword=${keyword}`)
+                .then(response => response.json())
+                .then(data => {
+                    const searchResults = document.getElementById('searchResults');
+                    searchResults.innerHTML = '';
+
+                    if (data.error) {
+                        searchResults.innerHTML = `<p>${data.error}</p>`;
+                    } else if (data.posts.length === 0) {
+                        searchResults.innerHTML = '<p>검색 결과가 없습니다.</p>';
+                    } else {
+                        data.posts.forEach(post => {
+                            const postElement = document.createElement('div');
+                            postElement.classList.add('search-result');
+                            postElement.innerHTML = `<a href="${post.url}" style="text-decoration: none; color: inherit;"> 
+                                <h3>${post.posttitle}</h3>
+                                <p>${post.postcontent}</p>
+                            </a>
+                            `;
+                            searchResults.appendChild(postElement);
+                        });
+                    }
+
+                    openModal();
+                });
+        });
+
+        function openModal() {
+            document.getElementById('searchModal').style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById('searchModal').style.display = "none";
         }
     </script>
 </body>

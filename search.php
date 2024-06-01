@@ -21,6 +21,7 @@ if ($stmt = $conn->prepare("SELECT p.postnum, p.memberid, p.posttitle, p.postcon
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
+        $row['url'] = 'post_detail.php?postnum=' . $row['postnum']; // 게시물 URL 생성
         $posts[] = $row;
     }
     $stmt->close();
