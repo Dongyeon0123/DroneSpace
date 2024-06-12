@@ -204,7 +204,7 @@
         window.addEventListener('scroll', function() {
             const scrollheader = document.getElementById('scrollheader');
             const mainHeader = document.getElementById('mainHeader');
-            if (window.scrollY > 150) {
+            if (window.scrollY > 130) {
                 mainHeader.style.top = '-130px';
                 scrollheader.style.top = '0px';
             } else {
