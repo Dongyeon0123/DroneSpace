@@ -20,6 +20,8 @@
 
 ## 메인 페이지
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/e692241d-e396-46e9-bfc8-0bc019441909" />
+## 오른쪽 위 햄버거 메뉴
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/17b1fd49-baf5-430c-8db8-16c9e430d608" />
 
 ## 회원가입 & 로그인페이지
 <img width="569" alt="image" src="https://github.com/user-attachments/assets/ebc2e128-e64f-4bd8-a676-275a3a249f8b" />
