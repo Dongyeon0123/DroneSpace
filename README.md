@@ -20,6 +20,7 @@
 
 ## 메인 페이지
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/e692241d-e396-46e9-bfc8-0bc019441909" />
+
 ## 오른쪽 위 햄버거 메뉴
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/17b1fd49-baf5-430c-8db8-16c9e430d608" />
 
@@ -57,7 +58,7 @@
 
 ## 관리자 계정으로 들어간 1대1 질문 페이지
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/6ffa4b30-f390-4270-9442-55ab11f73924" />
-관리자 계정으로 1대1 질문 페이지를 들어가면, 사용자들이 남긴 질문들을 확인 & 수정 & 삭제시킬 수 있고, 답변을 달 수 있다.
+관리자 계정으로 1대1 질문 페이지를 들어가면, 사용자들이 남긴 질문들을 확인 & 삭제시킬 수 있고, 답변을 달 수 있다.
 
 
 ## 개발 기간
