@@ -18,6 +18,46 @@
 
 나머지 2명의 팀원들이 웹 사이트 내용으로 넣기위한 요소를 조사하였다.
 
+## 메인 페이지
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/e692241d-e396-46e9-bfc8-0bc019441909" />
+
+## 회원가입 & 로그인페이지
+<img width="569" alt="image" src="https://github.com/user-attachments/assets/ebc2e128-e64f-4bd8-a676-275a3a249f8b" />
+
+## 커뮤니티
+<img width="1709" alt="image" src="https://github.com/user-attachments/assets/6f0497de-714d-4d3b-a5a0-8880599334ae" />
+
+## 커뮤니티 HOT 게시글
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/fc4f6d6b-d42b-4026-a77c-658330fe1665" />
+좋아요 개수가 **10개**가 넘어가면, HOT게시글로 넘어가게 된다.
+
+## 내가 작성한 게시글 & 댓글
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/5a37d56e-25d0-4e18-8bd8-958cdaec22b6" />
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/bde6de0a-06e6-4154-b857-d47cfe600141" />
+
+## 구인&구직 페이지
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/dc78e68d-c2a4-4858-be9a-52aa159471d4" />
+
+## 구인&구직
+<img width="1709" alt="image" src="https://github.com/user-attachments/assets/ba59b057-8b4b-4d39-830a-efa615aa0ebe" />
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/ede54959-a481-4088-ab3f-c44ef8ecc32d" />
+
+## 구인&구직 신청
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/37116c01-24b2-4646-8b13-8e00c503ea78" />
+아래는 다른 계정에서 확인한 이력서 열람
+<img width="1708" alt="image" src="https://github.com/user-attachments/assets/1e0fece6-bf6f-47b0-94e2-94fe5de2e15d" />
+
+## 내 이력서 작성
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/3f115db9-f760-428a-8393-9610be2c1d30" />
+
+## 관리자 로그인
+<img width="370" alt="image" src="https://github.com/user-attachments/assets/5c52ee02-003d-4116-8e66-e460c4b6ad98" />
+
+## 관리자 계정으로 들어간 1대1 질문 페이지
+<img width="1710" alt="image" src="https://github.com/user-attachments/assets/6ffa4b30-f390-4270-9442-55ab11f73924" />
+관리자 계정으로 1대1 질문 페이지를 들어가면, 사용자들이 남긴 질문들을 확인 & 수정 & 삭제시킬 수 있고, 답변을 달 수 있다.
+
+
 ## 개발 기간
 2024년 5월 10일 ~ 2024년 6월 2일
 
